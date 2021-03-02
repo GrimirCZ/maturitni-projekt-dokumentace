@@ -6,8 +6,6 @@ cp -rf src build
 
 cd build
 
-ls build
-
 echo Running vlna to correct czech spelling
 
 for filename in *.tex; do
@@ -17,7 +15,6 @@ for filename in *.tex; do
   done
 
 rm *~
-
 
 latexmk -pdf -f -bibtex -interaction=nonstopmode 
 
