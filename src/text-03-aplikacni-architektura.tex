@@ -5,20 +5,20 @@ Tato sekce popisuje technologie využité při vývoji aplikace \bso.
 
 \subsection{HTTP}
 
-\acrshort{http}\cite{http} je jeden z klíčových internetových protokolů. Mezi jeho hlavní přednosti patří jeho textová podoba a bezstavovost. Po síti tedy cestují pouze jednoduše stravitelné textové řetězce, převážně čitelné i pro člověka. Díky tomu je oproti ostatním přenosovým protokolům jednoduše použitelný a implementovatelný. Bezstavovost znamená, že jednotlivé \acrshort{http} požadavky na sebe nijak nenavazují a jsou plně nezávislé.
+\acrshort{http}\cite{http} je jeden z~klíčových internetových protokolů. Mezi jeho hlavní přednosti patří jeho textová podoba a bezstavovost. Po síti tedy cestují pouze jednoduše stravitelné textové řetězce, převážně čitelné i pro člověka. Díky tomu je oproti ostatním přenosovým protokolům jednoduše použitelný a implementovatelný. Bezstavovost znamená, že jednotlivé \acrshort{http} požadavky na sebe nijak nenavazují a jsou plně nezávislé.
 
 \subsection{PHP}
 \label{sub:php}
 
-\acrshort{php}\cite{php} je skriptovací jazyk vytvořený v roce 1994 pro snadný vývoj dynamických a interaktivních webových aplikací. Hlavními přednostmi jazyka \acrshort{php} je dynamický typový systém, extenzívní standardní knihovna a hluboká integrace s klíčovými webovými technologiemi. Funkcionalita jazyka PHP je dále rozšiřována velkým množstvím knihoven a frameworků. Pro jednoduchou správu těchto knihoven je využíván správce balíčků Composer\cite{composer}.
+\acrshort{php}\cite{php} je skriptovací jazyk vytvořený v~roce 1994 pro snadný vývoj dynamických a interaktivních webových aplikací. Hlavními přednostmi jazyka \acrshort{php} je dynamický typový systém, extenzívní standardní knihovna a hluboká integrace s~klíčovými webovými technologiemi. Funkcionalita jazyka PHP je dále rozšiřována velkým množstvím knihoven a frameworků. Pro jednoduchou správu těchto knihoven je využíván správce balíčků Composer\cite{composer}.
 
 \subsection{PHP Frameworky}
 
-Vytváření rozsáhlé a propracované webové aplikace je těžký a dlouho trvající úkol. Z tohoto důvodu se využívají tzv. \emph{\glspl{framework}}. Tyto \glspl{framework} obsahují široké množství nástrojů pro usnadnění vývoje webových aplikací. Mezi nejčastěji poskytované nástroje patří \Gls{orm}\cite{orm}, \gls{php-router}\cite{php-router}, či \gls{php-templater}\cite{php-templater}. Dále může obsahovat nástroje na správu uživatelských sezení a různé další utility. Časté jsou i různé terminálové programy určené k ulehčení práce s daným \gls{framework}em, např. pro generování kontrolerů, databázových migrací a správu mezipaměti.
+Vytváření rozsáhlé a propracované webové aplikace je těžký a dlouho trvající úkol. Z~tohoto důvodu se využívají tzv. \emph{\glspl{framework}}. Tyto \glspl{framework} obsahují široké množství nástrojů pro usnadnění vývoje webových aplikací. Mezi nejčastěji poskytované nástroje patří \Gls{orm}\cite{orm}, \gls{php-router}\cite{php-router}, či \gls{php-templater}\cite{php-templater}. Dále může obsahovat nástroje na správu uživatelských sezení a různé další utility. Časté jsou i různé terminálové programy určené k~ulehčení práce s~daným \gls{framework}em, např. pro generování kontrolerů, databázových migrací a správu mezipaměti.
 
 Využitím \gls{framework}u můžeme významně zkrátit čas vývoje aplikace, jelikož autoři \gls{framework}u za nás učinil většinu architekturálních rozhodnutí a implementovali obslužný kód. Nám tedy zbývá pouze byznysová logika naší aplikace a nemusíme řešit věci jako je ukládání často využívaných dat do mezipaměti, či ověřování uživatelů.
 
-Na druhou stranu využití \gls{framework}u sebou nese i jisté nebezpečí. \Gls{framework}y se mezi sebou liší, tudíž zkušenosti s jedním \gls{framework}em nemusí být přenositelné na druhý. Často je tomu naopak - při používání \gls{framework}u nevhodným způsobem mohou vzniknout velké problémy, především po stránce výkonu aplikace. Dalším velkým nebezpečím mohou být \glspl{bug} samotného \gls{framework}u, jejichž opravou, či obcházením ztrácíme čas určený pro vývoj aplikace samotné.
+Na druhou stranu využití \gls{framework}u sebou nese i jisté nebezpečí. \Gls{framework}y se mezi sebou liší, tudíž zkušenosti s~jedním \gls{framework}em nemusí být přenositelné na druhý. Často je tomu naopak - při používání \gls{framework}u nevhodným způsobem mohou vzniknout velké problémy, především po stránce výkonu aplikace. Dalším velkým nebezpečím mohou být \glspl{bug} samotného \gls{framework}u, jejichž opravou, či obcházením ztrácíme čas určený pro vývoj aplikace samotné.
 
 \subsubsection{Laravel}
 \label{subsub:laravel}
@@ -29,15 +29,15 @@ Laravel\cite{laravel} je \acrshort{php} \gls{framework} pro snadné tvoření ko
 
 Většina webových aplikací vyžaduje dříve či později nějakou \gls{real-time} funkcionalitu. Je mnoho způsobů, jak tuto funkcionalitu implementovat. Můžeme využít \Gls{http-polling}\cite{http-polling} nebo \Gls{http-sse}\cite{http-sse}. Velká slabina obou těchto přístupů je, že i když máme stále aktuální data ze serveru, tak neexistuje způsob, jak tyto metody využít pro odesílání požadavků na server. Je proto nutné udělat separátní \acrshort{http} požadavek, což je velice neefektivní.
 
-Protokol \acrfull{ws}\cite{ws} se tento problém snaží řešit poskytováním plně duplexní komunikace mezi klientským programem a serverem. Jelikož se jedná o protokol cílený na použití ve webových prohlížečích, staví tento protokol nad protokolem \acrshort{http}, který používá pro \expl{navázání komunikace}{handshaking}. Využívá i stejné porty jako protokol \acrshort{http}, port 80 pro nešifrovanou a port 443 pro šifrovanou komunikaci.
+Protokol \acrfull{ws}\cite{ws} se tento problém snaží řešit poskytováním plně duplexní komunikace mezi klientským programem a serverem. Jelikož se jedná o~protokol cílený na použití ve webových prohlížečích, staví tento protokol nad protokolem \acrshort{http}, který používá pro \expl{navázání komunikace}{handshaking}. Využívá i stejné porty jako protokol \acrshort{http}, port 80 pro nešifrovanou a port 443 pro šifrovanou komunikaci.
 
 \subsubsection{Pusher}
 \label{subsub:pusher}
 
-Pusher\cite{pusher} je software stavějící nad \acrshort{ws} protokolem poskytující \gls{pubsub} komunikaci v reálném čase mezi serverem a klientskými zařízeními. Je vhodný pro aplikace, které nemohou tyto funkcionality poskytovat samy o sobě, např. stránky napsané v \acrshort{php}. Pro tyto aplikace poskytuje Pusher jednoduché \acrshort{http} rozhraní, skrze které je možné zprávy zasílat a docílit tím komunikace v reálném čase.
+Pusher\cite{pusher} je software stavějící nad \acrshort{ws} protokolem poskytující \gls{pubsub} komunikaci v~reálném čase mezi serverem a klientskými zařízeními. Je vhodný pro aplikace, které nemohou tyto funkcionality poskytovat samy o~sobě, např. stránky napsané v~\acrshort{php}. Pro tyto aplikace poskytuje Pusher jednoduché \acrshort{http} rozhraní, skrze které je možné zprávy zasílat a docílit tím komunikace v~reálném čase.
 
 \subsection{Datový model}
 
 Datový model\cite{data-model} určuje způsob průtok dat, interakcí mezi daty a uložení dat aplikace. Od datového modelu se odvíjí většina aspektů aplikace, např. způsob fungování nebo rozložení formulářů a přehledů.
 
-Návrh datového modelu je jedna z nejdůležitějších částí vývoje webové aplikace.  Pokud pří návrhu uděláme chybu můžeme si vývoj aplikace velice ztížit. Na druhou stranu dobře připravený datový model velice zjednodušuje vývoj aplikace, jelikož může sloužit jako referenční manuál pro její rozložení.
+Návrh datového modelu je jedna z~nejdůležitějších částí vývoje webové aplikace.  Pokud pří návrhu uděláme chybu můžeme si vývoj aplikace velice ztížit. Na druhou stranu dobře připravený datový model velice zjednodušuje vývoj aplikace, jelikož může sloužit jako referenční manuál pro její rozložení.

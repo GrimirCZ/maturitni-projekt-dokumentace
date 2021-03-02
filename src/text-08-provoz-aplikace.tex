@@ -4,19 +4,36 @@
 
 \subsection{Jedno-serverové nasazení}
 
-První verze aplikace \bso využívala pouze jeden server pro hostování všech aplikačních funkcí jako \acrshort{webserver}, databázový server a aplikační server. Tento způsob hostování má však mnoho problémů.
+První verze aplikace \bso{} využívala pouze jeden server pro hostování všech aplikačních funkcí jako \acrshort{webserver}, databázový server a aplikační server. Tento způsob hostování má však mnoho problémů.
 
-Jelikož celá infrastruktura běží na jednom serveru narážíme na velké bezpečnostní riziko vytvářením kritického bodu infrastruktury, jehož nedostupnost nebo porucha znamená výpadek celé aplikace. To také znamená, že není možné aplikaci aktualizovat bez jejího výpadku. 
+Jelikož celá infrastruktura běží na jednom serveru narážíme na velké bezpečnostní riziko vytvářením kritického bodu infrastruktury, jehož nedostupnost nebo porucha znamená výpadek celé aplikace. 
+To také znamená, že není možné aplikaci aktualizovat bez jejího výpadku. 
 
-Druhým, i když menším problémem, je omezení možnosti škálování v odpovědi na nárůst požadavků, jelikož pro alokaci větších serverových prostředků je nutné server vypnout. Pro aplikace \bso toto nepředstavovalo velký problém jelikož jazyk \acrshort{php} je velice efektivní ve využívání serverových prostředků a provoz aplikace byl zanedbatelný.
+Druhým, i když menším problémem, je omezení možnosti škálování v~odpovědi na nárůst požadavků, jelikož pro alokaci větších serverových prostředků je nutné server vypnout.
+Pro aplikaci \bso{} toto nepředstavovalo velký problém jelikož jazyk \acrshort{php} je velice efektivní ve využívání serverových prostředků a provoz aplikace nepřekročil alokované serverové prostředky.
 
 \subsection{Více-serverové nasazení}
 
-Abych tyto problémy vyřešil
+Pro vyřešení tohoto problému byla \hyperref[fig:servery]{infrastruktura byla rozšířena} na více serverů. 
+
+Jako vstupní bod infrastruktury byl vyčleněn server označen \textit{gateway}.
+Mezi hlavní role tohoto serveru byly určeny \hyperref[sub:load-balancing]{load-balancer} a vstupní bod protokolů \acrshort{http} a \acrshort{ws}.
+To nám dovoluje provádět provizi ssl certifikátů a ssl terminaci pouze v jednom místě naší infrastruktury.
+
+Jelikož \textit{gateway} poskytuje služby \hyperref[sub:load-balancing]{load-balanceru} mohlo být vytvořeno několik, na sobě nezávyslých, instancí aplikace \bso{}.
+Pro provedení tohoto kroku bylo zapotřebí rozčlenit všechny zdroje dat, např. \acrshort{rdbms} nebo ukládání souborů, na dedikované servery, jelikož aplikační servery nemohou tyto služby mezi sebou sdílet.
+Jako \acrshort{rdbms} byla využita spravovaná databáze společnosti Digitalocean, která poskytuje replikaci a redundanci databázových serverů.
+Na ukládání souborů bylo využito objektové úložiště Amazon S3, to nám dovoluje manipulovat se soubory ze všech aplikačních serverů najednou, bez potřeby vlastní infrastruktury.
+
+Rozčlenění aplikačních serverů nám poskytuje větší odolnost proti výpadku samostatných serverů, výpadek serveru neznamená výpadek aplikace, pouze zhoršení dostupnosti.
+Také nám dovoluje aplikaci škálovat bez potřeby její odstávky.
+
+
 
 \subsection{Provoz aplikace}
 
-Ve špičce provozu aplikace \bso využíval \hyperref[sub:load-balancing]{load-balancer} asi 30\si{Mb/S} síťového provozu. Systém v tu dobu navštívilo asi 790 návštěvníků, tj. kolem 25 návštěvníků na školu\footnote{Čísla nejsou exaktní z důvodu nemožnosti přesného měření návštěvnosti webových stránek.}.
+Ve špičce provozu aplikace \bso{} využíval \hyperref[sub:load-balancing]{load-balancer} asi 30\si{Mb/S} síťového provozu.
+Systém v~tu dobu navštívilo asi 790 návštěvníků, tj.\ kolem 25 návštěvníků na školu\footnote{Čísla nejsou exaktní z~důvodu nemožnosti přesného měření návštěvnosti webových stránek.}.
 
 % tohle musí přesvědčit porotu o  tom, že si s nasazením nevymýšlíte.
 % které bude na kolika serverech se to replikuje, jak vytížené jsou, jak vytížený je load-balancer,
