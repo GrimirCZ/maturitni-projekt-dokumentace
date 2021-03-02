@@ -1,0 +1,124 @@
+% soctepmlate unofficial - SOČ = Středoškolská odborná činnost - Czech competition
+% Author: Vojtěch Boček
+% Edit by: Jaroslav Páral
+% Version: 2018-02-12
+% Source code: https://github.com/RoboticsBrno/soctemplate/
+% Base on: http://www.jcmm.cz/cz/sablona-soc.html
+% License: CC BY 4.0
+
+\documentclass{template/socthesis}
+
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{glossaries}
+\usepackage{hyperref}
+\usepackage{csquotes}
+\usepackage{siunitx}
+
+\addbibresource{text.bib}
+
+
+\titlecz{Webový portál BurzaŠkol.Online}
+\titleen{BurzaŠkol.Online Web Portal}
+\author{Vít Falta}
+\field{18}
+\school{DELTA - Střední škola informatiky a ekonomie, s.r.o.}
+\mentor{RNDr. Jana Koupila, Ph.D.}
+
+% Změňte, pokud se liší
+\region{Pardubický}
+\placefooter{Pardubice 2020}
+
+\input{prikazy}
+
+\makeglossaries
+
+
+\input{zkratky}
+
+\begin{document}
+
+	
+	\maketitle
+	
+	\makecopyrightstatement{V~Pardubichích}
+	
+	\makethanks{Děkuji svému školiteli RNDr. Janu Koupilovi, Ph.D. za obětavou pomoc, podnětné připomínky a nekonečnou trpělivost, kterou mi během práce poskytoval.}
+	
+	\pagestyle{empty}
+	
+	\section*{Anotace}
+	Cílem této práce je vytvořit online platformu, která umožní nahrazení klasických burz škol v České Republice, pomocí moderních webových technologií v~době pandemie Covidu-19. Tato platforma zprostředkuje kontakt mezi středními školami a žáky 9. ročníků základních škol v době, kdy jsou klasické burzy škol z hygienických důvodů nemožné.
+	
+	\subsection*{Klíčová slova}
+	burza škol; webová stránka; www; online; online platforma
+	
+	\vspace{20mm}
+	
+	\section*{Annotation}
+	The goal of this work is to create an online platform that will allow the replacement of traditional school exchanges in the Czech Republic using modern web technologies during the Covid-19 pandemic. This platform mediates contact between secondary schools and pupils in the 9th grade of primary schools, at a time when traditional school exchanges are impossible due to hygienic restritions.
+
+	\subsection*{Keywords}
+	school exchange; web page; www; online; online platform
+	
+	\newpage
+	\pagestyle{plain}
+	
+    \tableofcontents % vysází obsah
+	
+	%%% Začátek práce
+	\setcounter{figure}{0}
+	\setcounter{table}{0}
+	\newpage
+	
+	
+	%%% Úvod
+	\input{text-01-uvod.tex}
+	
+	\chapter{Teoretická část}
+	\label{chap:teoretical-part}
+	
+	%%% Fungování burz škol
+	\input{text-02-serverova-architektura}
+	
+	\input{text-03-aplikacni-architektura}
+
+	\input{text-04-vyvojova-prostredi}
+	
+	\chapter{Realizace projektu}
+	\label{chap:practical-part}
+	
+	\input{text-05-navrh-datoveho-modelu}
+	
+	\input{text-06-vyvoj-projektu}
+	
+	\input{text-07-nasazeni-projektu}
+	
+	\input{text-08-provoz-aplikace}
+	
+	\input{text-09-bezpecnost}
+	
+	\input{text-10-zaver}
+	
+	\chapter*{Seznamy}
+	\addcontentsline{toc}{chapter}{Seznamy}
+	
+	\section*{Literatura}
+	\addcontentsline{toc}{section}{Literatura}
+	\printbibliography[title=Literatura]
+	
+	\listoffigures
+	\addcontentsline{toc}{section}{Seznam obrázků}
+	
+	%\listoftables
+	%\addcontentsline{toc}{section}{Seznam tabulek}
+	
+	%\listoflistedequation
+	%\addcontentsline{toc}{section}{Seznam rovnic}
+	
+	\printglossaries
+	\addcontentsline{toc}{section}{Slovník}
+
+	
+\end{document}

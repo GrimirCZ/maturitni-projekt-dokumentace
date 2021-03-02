@@ -1,0 +1,28 @@
+% TODO: vymyslet lepší nadpisy
+
+\section{Postup projektu}
+
+\subsection{Jedno-serverové nasazení}
+
+První verze aplikace \bso využívala pouze jeden server pro hostování všech aplikačních funkcí jako \acrshort{webserver}, databázový server a aplikační server. Tento způsob hostování má však mnoho problémů.
+
+Jelikož celá infrastruktura běží na jednom serveru narážíme na velké bezpečnostní riziko vytvářením kritického bodu infrastruktury, jehož nedostupnost nebo porucha znamená výpadek celé aplikace. To také znamená, že není možné aplikaci aktualizovat bez jejího výpadku. 
+
+Druhým, i když menším problémem, je omezení možnosti škálování v odpovědi na nárůst požadavků, jelikož pro alokaci větších serverových prostředků je nutné server vypnout. Pro aplikace \bso toto nepředstavovalo velký problém jelikož jazyk \acrshort{php} je velice efektivní ve využívání serverových prostředků a provoz aplikace byl zanedbatelný.
+
+\subsection{Více-serverové nasazení}
+
+Abych tyto problémy vyřešil
+
+\subsection{Provoz aplikace}
+
+Ve špičce provozu aplikace \bso využíval \hyperref[sub:load-balancing]{load-balancer} asi 30\si{Mb/S} síťového provozu. Systém v tu dobu navštívilo asi 790 návštěvníků, tj. kolem 25 návštěvníků na školu\footnote{Čísla nejsou exaktní z důvodu nemožnosti přesného měření návštěvnosti webových stránek.}.
+
+% tohle musí přesvědčit porotu o  tom, že si s nasazením nevymýšlíte.
+% které bude na kolika serverech se to replikuje, jak vytížené jsou, jak vytížený je load-balancer,
+
+\section{Přínos aplikace}
+
+% tohle musí přesvědčit porotu o společenském přínosu, smysluplnosti aplikace 
+
+% kolik v systému bylo škol, kdy byl nasazen poprvé a kolik se přes něj uskutečnilo spojení.
