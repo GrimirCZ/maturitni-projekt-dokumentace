@@ -7,7 +7,7 @@
 
 ## How to build
 
-```bash
+```shell
 chmod +x compile.sh
 ./compile.sh
 ```
