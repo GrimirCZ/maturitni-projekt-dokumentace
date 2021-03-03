@@ -2,6 +2,8 @@
 
 \section{Postup projektu}
 
+V této sekci je popsáno praktické nasazení projektu \bso{}.
+
 \subsection{Jedno-serverové nasazení}
 
 První verze aplikace \bso{} využívala pouze jeden server pro hostování všech aplikačních funkcí jako \acrshort{webserver}, databázový server a aplikační server. Tento způsob hostování má však mnoho problémů.
@@ -28,8 +30,26 @@ Na ukládání souborů bylo využito objektové úložiště Amazon S3 pro mani
 Rozčlenění aplikačních serverů nám poskytuje větší odolnost proti výpadku samostatných serverů, výpadek serveru neznamená výpadek aplikace, pouze zhoršení dostupnosti.
 Také nám dovoluje aplikaci škálovat bez potřeby její odstávky.
 
+\subsection{Problém s pracovními vlákny load-balanceru Nginx}
 
-\subsection{Provoz aplikace}
+Při prvním veřejné výstavě uspořádané skrze platformu \bso{} docházelo při požadavcích na server k výpadkům a překročení časového limitu požadavku.
+Po konzultaci souboru \verb|/var/log/nginx/access.log| bylo zjištěno, že na serveru \textit{gateway} došlo k vyčerpání \acrshort{fd}.
+To vedlo k nemožnosti spracování požadavků serverem.
+
+Pokud není webový server schopný odpovědět v časovém limitu zobrazí webový prohlížeč stránku jako nedostupnou,
+jelikož webové prohlížeče implementují časový limit pro požadavky\cite{browser-timeout}.
+
+Pro opravu této chyby bylo zapotřebí zvýšit počet požadavků spracovávaných jedním pracovním vláknem a horní limit \acrshort{fd}.
+Tyto změny byly provedeny v souboru \verb|/etc/nginx/nginx.conf|.
+Zvýšení počtu požadavků, které je schopné jedno pracovní vlákno spracovat bylo zvýšeno použitím direktivy.
+\begin{verbatim}
+events {
+      worker_connections <počet připojení>;
+}
+\end{verbatim}
+Pro zvýšení horního limitu \acrshort{fd} byla použita direktiva \verb|worker_rlimit_nofile <počet FD>|.
+
+\section{Provoz aplikace}
 
 Ve špičce provozu aplikace \bso{} využíval \hyperref[sub:load-balancing]{load-balancer} asi 30\si{Mb/S} síťového provozu.
 Systém v~tu dobu navštívilo asi 790 návštěvníků, tj.\ kolem 25 návštěvníků na školu\footnote{Čísla nejsou exaktní z~důvodu nemožnosti přesného měření návštěvnosti webových stránek.}.
