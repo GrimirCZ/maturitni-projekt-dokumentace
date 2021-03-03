@@ -1,6 +1,6 @@
 # Dokumentace k maturitnímu projektu
 
-- export je dostupný v souboru out.pdf **!!!nemusí být aktuální!!!**
+- export je dostupný v souboru [https://github.com/GrimirCZ/maturitni-projekt-dokumentace/blob/master/out.pdf](out.pdf) **!!!nemusí být aktuální!!!**
 
 ## Závislosti
 
