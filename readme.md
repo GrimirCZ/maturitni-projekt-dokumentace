@@ -1,11 +1,13 @@
 # Dokumentace k maturitnímu projektu
 
-## Dependencies
+- export je dostupný v souboru out.pdf **!!!nemusí být aktuální!!!**
+
+## Závislosti
 
 - latexmk
 - vlna
 
-## How to build
+## Návod ke kompilaci
 
 ```shell
 chmod +x compile.sh
