@@ -22,12 +22,11 @@ To nám dovoluje provádět provizi ssl certifikátů a ssl terminaci pouze v je
 
 Jelikož \textit{gateway} poskytuje služby \hyperref[sub:load-balancing]{load-balanceru} mohlo být vytvořeno několik, na sobě nezávyslých, instancí aplikace \bso{}.
 Pro provedení tohoto kroku bylo zapotřebí rozčlenit všechny zdroje dat, např. \acrshort{rdbms} nebo ukládání souborů, na dedikované servery, jelikož aplikační servery nemohou tyto služby mezi sebou sdílet.
-Jako \acrshort{rdbms} byla využita spravovaná databáze společnosti Digitalocean, která poskytuje replikaci a redundanci databázových serverů.
-Na ukládání souborů bylo využito objektové úložiště Amazon S3, to nám dovoluje manipulovat se soubory ze všech aplikačních serverů najednou, bez potřeby vlastní infrastruktury.
+Jako \acrshort{rdbms} byla využita spravovaná databáze společnosti Digitalocean s replikací a automatickou správou redundantních serverů.
+Na ukládání souborů bylo využito objektové úložiště Amazon S3 pro manipulaci se soubory ze všech aplikačních serverů najednou, bez potřeby vlastní infrastruktury.
 
 Rozčlenění aplikačních serverů nám poskytuje větší odolnost proti výpadku samostatných serverů, výpadek serveru neznamená výpadek aplikace, pouze zhoršení dostupnosti.
 Také nám dovoluje aplikaci škálovat bez potřeby její odstávky.
-
 
 
 \subsection{Provoz aplikace}
