@@ -5,6 +5,7 @@
 ## Závislosti
 
 - latexmk
+- texlive
 - vlna
 
 ## Návod ke kompilaci
