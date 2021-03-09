@@ -1,12 +1,12 @@
 \section{Nasazení a provoz projektu}
 \label{sec:deployment-running}
 
-Tato kapitola je věnována nasazení a provozu projektu \bso. Popisuje volbu hostingové služby a důvody k~ní vedoucí, serverovou architekturu a obsahuje také poznatky a překonané problémy, které v~průběhu nasazování projektu vznikli.
+Tato kapitola je věnována nasazení a provozu projektu \bso{}. Popisuje volbu hostingové služby a důvody k~ní vedoucí, serverovou architekturu a obsahuje také poznatky a překonané problémy, které v~průběhu nasazování projektu vznikli.
 
 \subsection{Hostingová služba}
 \label{sub:hosting}
 
-Při navrhování projektu \bso byly zvažovány služby Amazon AWS\cite{amazon-aws}, Microsoft Azure\cite{ms-azure} a cloudem společnosti Digitalocean\cite{digitalocean}. Všechny tři služby poskytují velké množství pokročilých funkcí pro vývoj a provoz webových aplikací. 
+Při navrhování projektu \bso{} byly zvažovány služby Amazon AWS\cite{amazon-aws}, Microsoft Azure\cite{ms-azure} a cloudem společnosti Digitalocean\cite{digitalocean}. Všechny tři služby poskytují velké množství pokročilých funkcí pro vývoj a provoz webových aplikací. 
 
 Nakonec byl pro většinu funkcí zvolen cloud společnosti Digitalocean, jelikož má ze všech tří poskytovatelů nejjednodušší správu a finanční politiku, je přesně uvedeno za co platíte a neexistují žádné skryté limity a kvóty. Mezi další výhody cloudu Digitalocean patří vysoký výkon a velmi příznivé ceny.\cite{digitalocean-advantages}
 
@@ -16,7 +16,7 @@ Pro další funkcionality jako ukládání souborů a zasílání emailů byly v
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=11cm]{img/serverova-architektura.png}
-\caption{Serverová architektura projektu \bso}
+\caption{Serverová architektura projektu \bso{}}
 \label{fig:servery}
 \end{figure}
 
@@ -38,7 +38,7 @@ Internet je divokým a nebezpečným místem\cite{internet-is-dangerous-place}.
 
 Podle těchto dvou faktů musíme řídit svůj návrh serverové infrastruktury.  Musíme tedy vytvořit serverovou infrastrukturu, která je odolná, bezpečná a škálovatelná.
 
-Z~hlediska bezpečnosti můžeme rozdělit servery projektu \bso na dvě skupiny: okrajové servery a interní servery.
+Z~hlediska bezpečnosti můžeme rozdělit servery projektu \bso{} na dvě skupiny: okrajové servery a interní servery.
 
 Okrajové servery mají za úkol komunikaci s~Internetem. Jedná se o~několik přesně definovaných míst, skrze něž prochází všechna komunikace určená mimo naši infrastrukturu.
 
@@ -50,7 +50,7 @@ Z~pohledu resilience, obrany proti výpadku, jsou nejdůležitějšími opatřen
 \subsection{Postup nasazení aplikace}
 \label{sub:deployment}
 
-Prvním krokem je provize serveru. Jelikož projekt \bso obsahuje pouze malý počet serverů, bylo možné všechny servery nakonfigurovat a vytvořit přímo z~ovládacího panelu Digitalocean.
+Prvním krokem je provize serveru. Jelikož projekt \bso{} obsahuje pouze malý počet serverů, bylo možné všechny servery nakonfigurovat a vytvořit přímo z~ovládacího panelu Digitalocean.
 
 Poté co jsou servery vytvořeny přejdeme ke konfiguraci samostatných serverových rolí. Každá serverová role vyžaduje separátní konfiguraci a specifický software, aby mohla svou funkci vykonávat.
 
@@ -61,8 +61,8 @@ Posledním krokem je nastavení příslušných \acrshort{dns} záznamů a získ
 \subsection{Nasazování aktualizací aplikace}
 \label{sub:update-deployment}
 
-První přístup nasazování aktualizací, který byl na nasazování projektu \linebreak
-\bso využit, byl založený na Github Actions\cite{github-actions}. Github Actions je \gls{ci-cd} mechanismus založený na spouštění kódu v~závislosti na událostech verzovacího systému Git\cite{git}. Využíván byl SSH for Github Actions\cite{ssh-for-github-actions}, pro automatické nasazování při commitu do dedikované větve.
+První přístup nasazování aktualizací, který byl v projektu \bso{} využit, byl založený na Github Actions\cite{github-actions}.
+Github Actions je \gls{ci-cd} mechanismus založený na spouštění kódu v~závislosti na událostech verzovacího systému Git\cite{git}. Využíván byl SSH for Github Actions\cite{ssh-for-github-actions}, pro automatické nasazování při commitu do dedikované větve.
 
 Tento přístup má několik problémů. Hlavním problémem je fakt, že pro každý přidaný cílový server je zapotřebí vytvořit novou konfiguraci. Když vysazovací akce selže, je těžké najít příčinu, jelikož výpisy Github Actions jsou nepřehledné a zaměňují \acrshort{stdout} a \acrshort{stderr}. Posledním velkým problémem tohoto přístupu je, že pro spuštění vysazení je zapotřebí změna v~kódu aplikace.
 

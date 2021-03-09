@@ -1,7 +1,7 @@
 \section{Bezpečnost aplikace}
 \label{sec:security}
 
-Kapitola zaměřená na zabezpečení projektu \bso je z~důvodu komplexity tématu rozdělena na dvě části.  První část pojednává o~zabezpečení systému proti útokům vedeným skrze samotnou aplikaci, např. útokům typu \emph{\acrshort{sql} Injection}. Druhá kapitola se zaměří na zabezpečení infrastruktury proti útokům vedeným z~internetu cílících na špatně nakonfigurované služby, např. \emph{Útok na \acrshort{ssh} přihlašování serveru}.
+Kapitola zaměřená na zabezpečení projektu \bso{} je z~důvodu komplexity tématu rozdělena na dvě části.  První část pojednává o~zabezpečení systému proti útokům vedeným skrze samotnou aplikaci, např. útokům typu \emph{\acrshort{sql} Injection}. Druhá kapitola se zaměří na zabezpečení infrastruktury proti útokům vedeným z~internetu cílících na špatně nakonfigurované služby, např. \emph{Útok na \acrshort{ssh} přihlašování serveru}.
 
 \subsection{Aplikační zabezpečení}
 
@@ -13,7 +13,7 @@ Hlavní nebezpečí při provozování Webového portálu, plyne z~práce s~uži
 
 Tento útok představuje velké nebezpečí, jelikož může vést od ztráty dat, až k~úniku citlivých dat do rukou útočníka.
 
-Aplikace \bso se proti tomuto typu útoku brání pomocí \emph{předpřipravených dotazů}\cite{mysqlprepstmt}. Jedná se o~techniku, kdy je databázový dotaz rozdělen na dvě části. První část tvoří samotné příkazy, které popisují, jak bude daný dotaz proveden. Druhou část tvoří uživatelské vstupy. Tato část obsahuje pouze data a databázový server ji nikdy nespouští. Tím zabraňuje tomu, aby server vykonal uživatelský vstup jako příkaz. \emph{Předpřipravené dotazy}\cite{mysqlprepstmt} riziko tohoto útoku plně eliminují.
+Aplikace \bso{} se proti tomuto typu útoku brání pomocí \emph{předpřipravených dotazů}\cite{mysqlprepstmt}. Jedná se o~techniku, kdy je databázový dotaz rozdělen na dvě části. První část tvoří samotné příkazy, které popisují, jak bude daný dotaz proveden. Druhou část tvoří uživatelské vstupy. Tato část obsahuje pouze data a databázový server ji nikdy nespouští. Tím zabraňuje tomu, aby server vykonal uživatelský vstup jako příkaz. \emph{Předpřipravené dotazy}\cite{mysqlprepstmt} riziko tohoto útoku plně eliminují.
 
 \subsubsection{Cross-site skriptování}
 
@@ -22,7 +22,7 @@ Cross-site skriptování\cite{xss}, nebo také \acrshort{xss}, je typ útoku, p�
 Tento útok představuje pro návštěvníky velké nebezpečí, jelikož může vést ke krádeži uživatelských přihlášení, zobrazování reklam nebo krádeži platebních údajů.
 Mezi stránkové skriptování\cite{xss} může být také využito jako mezikrok pro další, např. phishingové\cite{phishing}, útoky.
 
-Potenciálními místy, kde by mohlo u~aplikace \bso k~napadení XSS dojít, jsou jednořádková vstupní pole a grafické textové editory. Jednořádková vstupní pole slouží pro jednoduchý uživatelský vstup bez formátování. Zabezpečení je tedy velice jednoduché. Jakýkoliv vstup, který uživatel zadá, je očištěn a veškeré \acrshort{html} značky jsou odstraněny. U~grafických textových editorů však není tato obrana možná, jelikož validním vstupem je i \acrshort{html} kód. Aplikace tedy daný kód na serveru parsuje a odstraní veškeré závadné \acrshort{html} značky, jako je například značka \emph{script}, a závadné \acrshort{html} atributy, jako například \emph{onmove}.
+Potenciálními místy, kde by mohlo u~aplikace \bso{} k~napadení XSS dojít, jsou jednořádková vstupní pole a grafické textové editory. Jednořádková vstupní pole slouží pro jednoduchý uživatelský vstup bez formátování. Zabezpečení je tedy velice jednoduché. Jakýkoliv vstup, který uživatel zadá, je očištěn a veškeré \acrshort{html} značky jsou odstraněny. U~grafických textových editorů však není tato obrana možná, jelikož validním vstupem je i \acrshort{html} kód. Aplikace tedy daný kód na serveru parsuje a odstraní veškeré závadné \acrshort{html} značky, jako je například značka \emph{script}, a závadné \acrshort{html} atributy, jako například \emph{onmove}.
 
 \subsubsection{Podvržení požadavků mezi stránkami}
 

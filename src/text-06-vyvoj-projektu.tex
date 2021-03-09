@@ -1,6 +1,6 @@
 \section{Vývoj projektu}
 
-V~této sekci jsou popsány technologie využité při vývoji portálu \bso a důvody pro jejich výběr, postup vývoje projektu a získané zkušenosti.
+V~této sekci jsou popsány technologie využité při vývoji portálu \bso{} a důvody pro jejich výběr, postup vývoje projektu a získané zkušenosti.
 
 \subsection{Využité technologie}
 \label{sub:used-technologies}
@@ -9,14 +9,14 @@ Při vývoji projektu byl využit programovací jazyk \nameref{sub:php} s~\gls{f
 
 \subsubsection{PHP a Laravel}
 
-Jelikož byla na začátku projektu \bso klíčová rychlost dodání \gls{mvp} byl vybrán jazyk \nameref{sub:php} společně s~\gls{framework}em \nameref{subsub:laravel} z~důvodu jednoduchosti nasazení, nízkých nákladů na provoz a velké flexibility a rychlosti vývoje. Dalším velkým plus jsou pomocné utility jako Composer\cite{composer} nebo Laravel Artisan Console\cite{laravel-artisan} a rozšíření Laravel Idea\cite{laravel-idea} pro \acrshort{ide} PhpStorm\cite{phpstorm}.
+Jelikož byla na začátku projektu \bso{} klíčová rychlost dodání \gls{mvp} byl vybrán jazyk \nameref{sub:php} společně s~\gls{framework}em \nameref{subsub:laravel} z~důvodu jednoduchosti nasazení, nízkých nákladů na provoz a velké flexibility a rychlosti vývoje. Dalším velkým plus jsou pomocné utility jako Composer\cite{composer} nebo Laravel Artisan Console\cite{laravel-artisan} a rozšíření Laravel Idea\cite{laravel-idea} pro \acrshort{ide} PhpStorm\cite{phpstorm}.
 
 Laravel, skrze Laravel Jetstream\cite{laravel-jetstream}, poskytuje předpřipravené části aplikace jako registrace a ověřování uživatelů, \acrshort{css} \gls{framework} Tailwind CSS\cite{tailwind-css} a JavaScriptový \gls{scaffolding} Inertia.js\cite{inertia-js} nebo Laravel Livewire\cite{laravel-livewire}.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{img/burzaskol-online.png}
-\caption{Aplikace \bso}
+\caption{Aplikace \bso{}}
 \label{fig:burzaskol-online-2020}
 \end{figure}
 
@@ -53,7 +53,7 @@ Když jsou modely a migrace úspěšně vytvořeny můžeme přistoupit k~vytvá
 
 Modely jsou \acrshort{php} třídy reprezentující samostatné databázové tabulky, řádky a relace mezi nimi. Modely nám dovolují vytvářet, upravovat a filtrovat záznamy jako by se jednalo o~nativní \acrshort{php} objekty. To velice zjednodušuje práci s~daty.
 
-V~současné době aplikace \bso obsahuje 26 modelů, např. \emph{School} pro vystavovatele nebo \emph{Region} pro kraj. 
+V~současné době aplikace \bso{} obsahuje 26 modelů, např. \emph{School} pro vystavovatele nebo \emph{Region} pro kraj. 
 
 \subsubsection{Migrace}
 
@@ -63,7 +63,7 @@ Migrace, \inlaravel, slouží pro kontrolované úpravy databáze. Jejich hlavn�
 
 \acrshort{http} cesty definují jaký kód je spuštěn při \acrshort{http} požadavku. Cesta je identifikována pomocí jedné, či více \acrshort{http} metod a \acrshort{http} cesty. Cesta v~sobě může obsahovat parametry, např. id knihy. Cesta může vést na \emph{\acrshort{http} přesměrování}, \emph{\acrshort{php} funkci} nebo \emph{\acrshort{http} kontroler}.
 
-Aplikace \bso definuje 38 unikátních \acrshort{http} cest. Velké množství \acrshort{http} cest dále přijmá různé parametry, které dále ovlivňují obsah vygenerované stránky.
+Aplikace \bso{} definuje 38 unikátních \acrshort{http} cest. Velké množství \acrshort{http} cest dále přijmá různé parametry, které dále ovlivňují obsah vygenerované stránky.
 
 \subsubsection{HTTP kontrolery}
 
