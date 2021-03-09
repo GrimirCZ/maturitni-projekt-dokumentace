@@ -49,10 +49,25 @@ events {
 \end{verbatim}
 Pro zvýšení horního limitu \acrshort{fd} byla použita direktiva \verb|worker_rlimit_nofile <počet FD>|.
 
-\section{Provoz aplikace}
+\section{Provoz a přínos aplikace}
+
 
 Ve špičce provozu aplikace \bso{} využíval \hyperref[sub:load-balancing]{load-balancer} asi 30\si{Mb/S} síťového provozu.
 Systém v~tu dobu navštívilo asi 790 návštěvníků, tj.\ kolem 25 návštěvníků na školu\footnote{Čísla nejsou exaktní z~důvodu nemožnosti přesného měření návštěvnosti webových stránek.}.
+
+\subsection{Zapojení škol}
+
+Během prvních 14-ti dní projektu se v Pardubickém Kraji, díky podpoře odboru školství, zapojilo více jak 60\% středních škol.
+V ostatních krajích bylo, i přes podporu \acrshort{msmt}, zapojení škol pouze sporadické.
+Pokrok ale nastal po zapojení Úřadu práce na celostátní úrovni, kdy jediný dopis informačním a poradenským střdiskům přinesl zapojení více než 250 škol z celé České Republiky.
+Zapojení úřadu práce nám také poskytlo další komunikační kanál se základními školami.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{img/kraje-zapojeni.png}
+\caption{Zapojení škol v jednotlivých krajích}
+\label{fig:kraje-zapojeni}
+\end{figure}
 
 % tohle musí přesvědčit porotu o  tom, že si s nasazením nevymýšlíte.
 % které bude na kolika serverech se to replikuje, jak vytížené jsou, jak vytížený je load-balancer,

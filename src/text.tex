@@ -11,11 +11,13 @@
 \usepackage{subcaption}
 \usepackage{amsmath}
 \usepackage{enumitem}
-\usepackage{glossaries}
 \usepackage{hyperref}
 \usepackage{csquotes}
 \usepackage{siunitx}
 \usepackage{listings}
+
+\usepackage{caption}
+\usepackage{glossaries}
 
 \addbibresource{text.bib}
 
@@ -34,7 +36,6 @@
 \input{prikazy}
 
 \makeglossaries
-
 
 \input{zkratky}
 
@@ -75,7 +76,7 @@
 	
 	
 	%%% Úvod
-	\input{text-01-uvod.tex}
+	\input{text-01-uvod}
 	
 	\chapter{Teoretická část}
 	\label{chap:teoretical-part}
@@ -96,9 +97,9 @@
 	
 	\input{text-07-nasazeni-projektu}
 	
-	\input{text-08-provoz-aplikace}
+	\input{text-08-bezpecnost}
 	
-	\input{text-09-bezpecnost}
+	\input{text-09-provoz-aplikace}
 	
 	\input{text-10-zaver}
 	

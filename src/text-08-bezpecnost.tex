@@ -26,7 +26,7 @@ Potenciálními místy, kde by mohlo u~aplikace \bso{} k~napadení XSS dojít, j
 
 \subsubsection{Podvržení požadavků mezi stránkami}
 
-Podvržení požadavků mezi stránkami (\acrshort{csrf}) \cite{csrf} je typ útoku, při kterém cizí stránka obsahuje odkaz, který vede na naši webovou adresu. Většinou se jedná o~požadavky typu POST. Tento požadavek má většinou za cíl vykonat škodlivou akci, např. napsat příspěvek bez vědomí uživatele. Při útoku je využíváno faktu, že prohlížeč s~každým požadavkem odesílá \acrshort{http} cookies, které ověřují uživatele serveru.
+Podvržení požadavků mezi stránkami (\acrshort{csrf}) \cite{csrf} je typ útoku, při kterém cizí stránka obsahuje odkaz, který vede na naši webovou adresu. Většinou se jedná o~požadavky typu POST\@. Tento požadavek má většinou za cíl vykonat škodlivou akci, např. napsat příspěvek bez vědomí uživatele. Při útoku je využíváno faktu, že prohlížeč s~každým požadavkem odesílá \acrshort{http} cookies, které ověřují uživatele serveru.
 
 Útočník tedy může například vytvořit novou objednávku a tím způsobit finanční újmu. Tento útok představuje pro uživatele velké nebezpečí.
 
@@ -46,7 +46,7 @@ Dalším důležitým faktorem bezpečnosti, při provozování webového portá
 
 \subsubsection{Útoky na SSH přihlašování}
 
-Při útoku na SSH přihlašování serveru se využívá povoleného přihlašování pomocí uživatelských hesel. Útok se snaží najít kombinace uživatelských jmen a hesel, které nejsou dostatečně komplexní a bezpečné. Častým cílem útoku je kořenový uživatel, \emph{root}, který by úspěšnému útočníkovi poskytl kompletní kontrolu nad cílovým strojem. K~prolomení hesel se využívají tzv. slovníkové útoky - soubory velkého množství častých hesel, kterými se útočník snaží zabezpečení prolomit.
+Při útoku na SSH přihlašování serveru se využívá povoleného přihlašování pomocí uživatelských hesel. Útok se snaží najít kombinace uživatelských jmen a hesel, které nejsou dostatečně komplexní a bezpečné. Častým cílem útoku je kořenový uživatel, \emph{root}, který by úspěšnému útočníkovi poskytl kompletní kontrolu nad cílovým strojem. K~prolomení hesel se využívají tzv.\ slovníkové útoky - soubory velkého množství častých hesel, kterými se útočník snaží zabezpečení prolomit.
 
 Pokud dojde k~prolomení \acrshort{ssh} přihlášení serveru získá tím útočník plný přístup k~serverovému terminálu. Je tedy schopný vykonávat všechny akce, ke kterým má napadený účet oprávnění. Útočník může například zapojit stroj do botnetu\cite{botnet}, zfalšovat nebo zaměnit poskytované stránky, či ukrást platební nebo osobní údaje.
 
