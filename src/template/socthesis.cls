@@ -48,6 +48,7 @@
 \def\school#1{\def\@school{#1}}
 \def\region#1{\def\@region{#1}}
 \def\mentor#1{\def\@mentor{#1}}
+\def\mentora#1{\def\@mentora{#1}}
 \def\mentorstatement#1{\def\@mentorstatement{#1}}
 \def\placefooter#1{\def\@placefooter{#1}}
 
@@ -79,7 +80,7 @@
 \titleen{}
 \region{Jihomoravský}
 \placefooter{Brno \the\year}
-\mentorstatement{\@mentor}
+\mentorstatement{\@mentora}
 
 %%% Titulní strany
 \renewcommand{\maketitle}{%

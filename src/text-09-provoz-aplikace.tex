@@ -4,7 +4,7 @@
 
 V této sekci je popsáno praktické nasazení projektu \bso{}.
 
-\subsection{Jedno-serverové nasazení}
+\subsection{Jedno-serverové nasazení}\label{sub:one-server}
 
 První verze aplikace \bso{} využívala pouze jeden server pro hostování všech aplikačních funkcí jako \acrshort{webserver}, databázový server a aplikační server. Tento způsob hostování má však mnoho problémů.
 
@@ -14,7 +14,7 @@ To také znamená, že není možné aplikaci aktualizovat bez jejího výpadku.
 Druhým, i když menším problémem, je omezení možnosti škálování v~odpovědi na nárůst požadavků, jelikož pro alokaci větších serverových prostředků je nutné server vypnout.
 Pro aplikaci \bso{} toto nepředstavovalo velký problém jelikož jazyk \acrshort{php} je velice efektivní ve využívání serverových prostředků a provoz aplikace nepřekročil alokované serverové prostředky.
 
-\subsection{Více-serverové nasazení}
+\subsection{Více-serverové nasazení}\label{sub:multi-server}
 
 Pro vyřešení tohoto problému byla \hyperref[fig:servery]{infrastruktura byla rozšířena} na více serverů. 
 
@@ -30,7 +30,7 @@ Na ukládání souborů bylo využito objektové úložiště Amazon S3 pro mani
 Rozčlenění aplikačních serverů nám poskytuje větší odolnost proti výpadku samostatných serverů, výpadek serveru neznamená výpadek aplikace, pouze zhoršení dostupnosti.
 Také nám dovoluje aplikaci škálovat bez potřeby její odstávky.
 
-\subsection{Problém s pracovními vlákny load-balanceru Nginx}
+\subsection{Problém s pracovními vlákny load-balanceru Nginx}\label{sub:poor-nginx}
 
 Při prvním veřejné výstavě uspořádané skrze platformu \bso{} docházelo při požadavcích na server k výpadkům a překročení časového limitu požadavku.
 Po konzultaci souboru \verb|/var/log/nginx/access.log| bylo zjištěno, že na serveru \textit{gateway} došlo k vyčerpání \acrshort{fd}.
@@ -50,10 +50,41 @@ events {
 Pro zvýšení horního limitu \acrshort{fd} byla použita direktiva \verb|worker_rlimit_nofile <počet FD>|.
 
 \section{Provoz a přínos aplikace}
+% tohle musí přesvědčit porotu o  tom, že si s nasazením nevymýšlíte.
+% které bude na kolika serverech se to replikuje, jak vytížené jsou, jak vytížený je load-balancer,
 
+\subsection{Provoz aplikace}
+
+Portál byl uveden do ostrého provozu 6 dní od začátku jeho vývoje, konkrétně 27. září 2020. Ze začátku byl vytvořen v jednoduché \hyperref[sub:one-server]{jedno-serverovou} architektuře.
+
+V prostředí portálu proběhlo celkem 142 on-line burz ve dvou hlavních vlnách od 7. do 14.12.2020 – hlavní vlna a potom 13.-20.1.2021,
+ve kterých se uskutečnilo přibližně 15 tisíc propojení mezi školou a zájemcem. 
+Od 2. řijna 2020 jsme převedli portál na robustnější \hyperref[sub:multi-server]{více-serverovou architekturu} abychom po technické stránce snáze zvládli nápor návštěvníků. 
 
 Ve špičce provozu aplikace \bso{} využíval \hyperref[sub:load-balancing]{load-balancer} asi 30\si{Mb/S} síťového provozu.
 Systém v~tu dobu navštívilo asi 790 návštěvníků, tj.\ kolem 25 návštěvníků na školu\footnote{Čísla nejsou exaktní z~důvodu nemožnosti přesného měření návštěvnosti webových stránek.}.
+
+Přes vánoční svátky jsme projekt zásadním způsobem rozšířili.
+Vytvořili jsme crawlery, které získaly data z veřejně dostupných databází a tato data začali zobrazovat. Konkrétně: 
+
+\begin{itemize}
+  \item z rejstříku škol \acrshort{msmt} jsme dohráli všechny existující střední školy a jejich obory (tak, aby uchazeč hledající na našich burzách viděl i základní informace o školách, které patří do okresu, ale k burze nejsou zaregistrované)
+  \item z portálu Excelence \acrshort{msmt} jsme dohráli ke školám všechny účasti a umístění jejich studentů v soutěžích za poslední 4 roky
+  \item z portálu CERMATu jsme dohráli ke všem maturitním oborům škol výsledky u didaktických testů u státních maturit
+  \item z portálu České školní inspekce jsme dohráli všechny inspekční zprávy škol
+\end{itemize}
+
+V době největších špiček bylo v jeden okamžik k portálu připojených přes 300 uživatelů 
+a za necelý půl roku jeho existence se k němu připojilo přes 66 tisíc unikátních uživatelů,
+kteří si zobrazili přes 686 tisíc stránek.
+V současné době, kdy skončila pro střední školy \uv{náborová sezóna} je na serveru provoz již spíše sporadický (řádově nižší stovky zobrazených stránek denně). 
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{img/listopad-leden-navstevnost.png}
+\caption{Graf návštěvnosti portálu \bso{} od Listopadu 2020 do Ledna 2021}\label{fig:navstevnost}
+\end{figure}
 
 \subsection{Zapojení škol}
 
@@ -65,14 +96,32 @@ Zapojení úřadu práce nám také poskytlo další komunikační kanál se zá
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{img/kraje-zapojeni.png}
-\caption{Zapojení škol v jednotlivých krajích}
-\label{fig:kraje-zapojeni}
+\caption{Zapojení škol v jednotlivých krajích}\label{fig:kraje-zapojeni}
 \end{figure}
 
-% tohle musí přesvědčit porotu o  tom, že si s nasazením nevymýšlíte.
-% které bude na kolika serverech se to replikuje, jak vytížené jsou, jak vytížený je load-balancer,
+\subsection{Přínos aplikace}
 
-\section{Přínos aplikace}
+Přínos aplikace jsem rozdělil do hlavních šesti bodů:
+
+\begin{enumerate}
+  \item Vymysleli jsme nový kanál pro komunikaci mezi uchazeči a středními školami, který v době pandemie alespoň částečně nahradil klasické prezenční výstavy středních škol.
+    Využili jsme možností on-line konferencí, které jsme podpořili internetovým portálem pro vyhledávání škol podle vhodných kategorií (geografická lokace, zaměření, obory, úroveň vzdělání, \ldots).
+
+  \item Agregovali jsme dosud nevyžité a opomíjené veřejné zdroje dat o školách (výsledky státních maturit, výsledky soutěží pořádaných \acrshort{msmt}, zprávy České školní inspekce)
+    do  jednoho portálu a umožnili jsme porovnávání škol.
+
+  \item Dokázali jsme celý portál \uv{oživit}. Aktivně se do něj zapojilo 465 středních škol a učilišť z celé ČR (více než 1/3).
+    Informovali jsme o něm všechny základní školy v ČR.
+
+  \item \uv{Navedli} jsme střední školy v ČR, aby zorganizovaly své dny otevřených dveří pomocí on-line konferencí.
+  \item Ve školním roce 2020/21 pomohl náš portál s volbou školy přibližně v 15 tisících případů. 
+    Přes portál proběhlo přes 43 tisíc pokusů o on-line propojení mezi návštěvníky a školou.
+    Podle zkušenosti z naší školy byl poměr mezi těmito pokusy a skutečnými smysluplnými připojeními přibližně 3:1. 
+
+  \item Zajistili jsme zachování našich přínosů i do budoucna. Funkcionalitu portálu v současné době zapojujeme do předního českého portálu pro vyhledávání škol s historií od roku 2012.
+  %\item Vytvořili jsme prostor pro naše mladší spolužáky, aby mohli zlepšovat své programátorské dovednosti na nějakém reálném projektu.
+  %\item Pomohli jsme vylepšit rozpočet naší školy o cca 750 tisíc Kč.
+\end{enumerate}
 
 % tohle musí přesvědčit porotu o společenském přínosu, smysluplnosti aplikace 
 
