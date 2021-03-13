@@ -107,15 +107,13 @@
 	
 	\input{text-10-zaver}
 	
-	\chapter*{Seznamy}
-	\addcontentsline{toc}{chapter}{Seznamy}
-	
-	\section*{Literatura}
-	\addcontentsline{toc}{section}{Literatura}
-	\printbibliography[title=Literatura]
-	
 	\listoffigures
-	\addcontentsline{toc}{section}{Seznam obrázků}
+	\addcontentsline{toc}{chapter}{Seznam obrázků}
+	
+%	\section*{Literatura}
+	\printbibliography[title=Literatura]
+	\addcontentsline{toc}{chapter}{Seznam literatury}
+	
 	
 	%\listoftables
 	%\addcontentsline{toc}{section}{Seznam tabulek}
@@ -124,7 +122,5 @@
 	%\addcontentsline{toc}{section}{Seznam rovnic}
 	
 	\printglossaries
-	\addcontentsline{toc}{section}{Slovník}
-
-	
+	\addcontentsline{toc}{chapter}{Slovník}
 \end{document}
