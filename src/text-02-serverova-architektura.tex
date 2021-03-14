@@ -1,10 +1,8 @@
-\section{Serverová infrastruktura}
-\label{sub:server-architecture}
+\section{Serverová infrastruktura}\label{sub:server-architecture}
 
 Tato sekce popisuje prvky serverové infrastruktury, které jsou nasazeny v~reálném řešení \bso{}.
 
-\label{sub:load-balancing}
-\subsection{Load Balancery}
+\subsection{Load Balancery}\label{sub:load-balancing}
 
 Load balancer\cite{load-balancer} je prvek serverové infrastruktury určený k~rozložení příchozích požadavků na skupinu backendových serverů. K~rozložení požadavků je využíváno nejrůznějších algoritmů, jako například \gls{round-robin}, \gls{least-con}, či \gls{ip-hash}. Dělíme je na \acrshort{sw} load balancery a \acrshort{hw} load balancery. 
 
@@ -14,7 +12,8 @@ Load balancer\cite{load-balancer} je prvek serverové infrastruktury určený k~
 
 \subsection{Objektová úložiště}
 
-Objektové úložiště je typ úložiště určený k~ukládaní nestrukturovaných dat. Na rozdíl od tradičních způsobů ukládání dat, jakými jsou souborové systémy a bloková úložiště, pracují objektová úložiště\cite{object-storage} s~daty jako se samostatnými objekty. Každý objekt obsahuje data samotná, uložená v~jejich nativním formátu, a metadata. Metadata obsahují informace jako přístupová práva objektu, unikátní globální identifikátor a další přidružené informace, jako například formát uložených dat. Díky adresaci za pomocí globálních identifikátorů je možné objekty transparentně přesouvat. Tato vlastnost nám poskytuje nezávislost dat na použitém záznamovém médiu.
+
+Objektové úložiště je typ úložiště určený k~ukládaní nestrukturovaných dat. Na rozdíl od tradičních způsobů ukládání dat, jakými jsou souborové systémy a bloková úložiště, pracují objektová úložiště\cite{object-storage} s~daty jako se samostatnými objekty. Každý objekt obsahuje data samotná, uložená v~jejich nativním formátu, a metadata. Metadata obsahují informace jako přístupová práva objektu, unikátní globální identifikátor a další přidružené informace, například formát uložených dat. Díky adresaci za pomocí globálních identifikátorů je možné objekty transparentně přesouvat. Tato vlastnost nám poskytuje nezávislost dat na použitém záznamovém médiu.
 
 Je tedy například možné přesunout málo používané objekty z~diskového úložiště na úložiště založené na magnetické pásce. Na druhou stranu ale také můžeme transparentně přesunout často požadované objekty z~úložiště do pracovní paměti pro rychlý přístup.
 
@@ -22,7 +21,7 @@ Objektová úložiště dovolují ukládání velkého objemu nestrukturovaných
 
 \subsection{Relační databáze}
 
-Relační databáze\cite{relational-database} jsou úložiště strukturovaných dat, založená na tzv. relačním modelu. Relační model organizuje data do \emph{tabulek}, \expl{\emph{řádků}}{záznamů} a \emph{sloupců}. Vzájemné vztahy mezi záznamy jsou reprezentovány \expl{\emph{relacemi}}{shodnými hodnotami dvou sloupců}. 
+Relační databáze\cite{relational-database} jsou úložiště strukturovaných dat, založená na tzv.\ relačním modelu. Relační model organizuje data do \emph{tabulek}, \expl{\emph{řádků}}{záznamů} a \emph{sloupců}. Vzájemné vztahy mezi záznamy jsou reprezentovány \expl{\emph{relacemi}}{shodnými hodnotami dvou sloupců}. 
 
 Software implementující relační databáze se nazývá \acrfull{rdbms}. \acrshort{rdbms} dále obsahuje implementaci některého z~dotazovacích jazyků, např. \acrshort{sql}, a podporu funkcí jako jsou \acrshort{acid}, \glspl{sql-trigger} a \glspl{sql-saved-procedure}.
 
@@ -30,8 +29,7 @@ Software implementující relační databáze se nazývá \acrfull{rdbms}. \acrs
 
 Pro dotazování a správu dat uchovaných v~\acrshort{rdbms} se využívá standardizovaný jazyk \acrshort{sql} (\acrlong{sql})\cite{sql}. Díky němu můžeme data analyzovat a získávat z~nich informace. Data můžeme shlukovat, transformovat a zkoumat pomocí nejrůznějších statistických funkcí.
 
-\subsubsection{Spravované databáze}
-\label{subsub:managed-databases}
+\subsubsection{Spravované databáz}\label{subsub:managed-databases}
 
 Provize a správa databází je velice komplikovaná. Je třeba řešit replikaci, a také automatické škálování. Spravované databáze\cite{managed-databases} se snaží tyto problémy řešit poskytováním předpřipravených databázových instancí, u~kterých je automaticky řešena provize a škálování. Většina spravovaných databází dále poskytuje velice bezpečné nastavení vyladěné pro maximální bezpečnost a výkon databáze. To nám dovoluje se starat pouze o~databázové objekty a uživatelské účty, tedy aspekty které přímo ovlivňují naši aplikaci.
 

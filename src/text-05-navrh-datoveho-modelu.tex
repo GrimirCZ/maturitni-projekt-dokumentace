@@ -7,16 +7,22 @@ Druhým krokem je vytyčení atributů datových entit. U~atributu je třeba ur�
 
 Dalším krokem je adaptace tohoto obecného datového modelu, do modelu specifického pro prostředí, v~kterém budou data uložena, např. relační databáze. V~tomto kroku dojde k~materializaci relací mezi entitami na cizí klíče a intermediate tabulky\cite{intermediate-table}. Podle atributů vytvořených v~druhém kroku vytvoříme příslušné sloupce s~odpovídajícími datovými typy a omezeními. 
 
-Posledním krokem, který nemusí nutně probíhat v~době návrhu, ale může být proveden dodatečně, je vytipování často využívaných dat a vytvoření tzv. \emph{indexů}\cite{index}. Ty slouží pro optimalizaci databázových dotazů a urychlení vyhledávání dat. Tento krok je dobré provést až po vytyčení hlavních dotazů a identifikaci míst, která by indexováním mohla benefitovat. \emph{Přílišné indexování může vést k~nárůstu velikosti databáze a zpomalení dotazů!}\cite{bad-indexing}
+Posledním krokem, který nemusí nutně probíhat v~době návrhu, ale může být proveden dodatečně, je určení často využívaných dat a vytvoření tzv. \emph{indexů}\cite{index}. Ty slouží pro optimalizaci databázových dotazů a urychlení vyhledávání dat. \emph{Přílišné indexování může vést k~nárůstu velikosti databáze a zpomalení dotazů!}\cite{bad-indexing}
 
-\begin{figure}[h]
+Datový model \bso{} je postaven kolem konceptu vystavovatele, z~implementačních důvodů reprezentováno tabulkou \emph{schools}.
+
+\begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{img/datovy-model-rijen-2020-2.png}
 \caption{Datový model aplikace \bso{} k~říjnu roku 2020}
 \label{fig:data-model-2020}
 \end{figure}
 
-Datový model \bso{} je postaven kolem konceptu vystavovatele, z~implementačních důvodů reprezentováno tabulkou \emph{schools}. Vystavovatelé jsou hlavní cílová skupina portálu. Mají možnost přihlásit se na výstavy a vložit krátký článek o~sobě, případně o~svých oborech, s~podporou formátování za pomoci \acrshort{html} značek. Portál umožňuje vystavovatelům nahrávat loga, informační brožury a obrázky, aby mohli zájemcům poskytnout maximální množství informací. V~současné podobě projektu \bso{} existují tři typy vystavovatelů: školy, firmy a Úřady Práce České Republiky. 
+
+Vystavovatelé jsou hlavní cílová skupina portálu. Mají možnost přihlásit se na výstavy a vložit krátký článek o~sobě,
+případně o~svých oborech, s~podporou formátování za pomoci \acrshort{html} značek.
+Portál umožňuje vystavovatelům nahrávat loga, informační brožury a obrázky, aby mohli zájemcům poskytnout maximální množství informací.
+V~současné podobě projektu \bso{} existují tři typy vystavovatelů: školy, firmy a Úřady Práce České Republiky. 
 
 Školy jsou hlavním typem vystavovatele. Mohou si vytvářet obory, které dále přiřazují k~oborům z~číselníku \acrshort{msmt}. To nám dovoluje poskytovat filtrování škol podle typu studia, zaměření a oborů samotných. Školy jsou také automaticky párovány s~výsledky maturitních zkoušek, výsledku soutěží zařazených do programu Excelence \acrshort{msmt} a k~inspekčním zprávám. Hlavní přínos portálu \bso{} pro školy je navázání kontaktu s~žáky 9. tříd a propagace. 
 

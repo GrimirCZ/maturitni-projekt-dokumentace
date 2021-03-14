@@ -41,7 +41,8 @@ jelikož webové prohlížeče implementují časový limit pro požadavky\cite{
 
 Pro opravu této chyby bylo zapotřebí zvýšit počet požadavků spracovávaných jedním pracovním vláknem a horní limit \acrshort{fd}.
 Tyto změny byly provedeny v souboru \verb|/etc/nginx/nginx.conf|.
-Zvýšení počtu požadavků, které je schopné jedno pracovní vlákno spracovat bylo zvýšeno použitím direktivy.
+\pagebreak
+Zvýšení počtu požadavků, které je schopné jedno pracovní vlákno spracovat bylo provedeno použitím direktivy:
 \begin{verbatim}
 events {
       worker_connections <počet připojení>;
@@ -55,17 +56,16 @@ Pro zvýšení horního limitu \acrshort{fd} byla použita direktiva \verb|worke
 
 \subsection{Provoz aplikace}
 
-Portál byl uveden do ostrého provozu 6 dní od začátku jeho vývoje, konkrétně 27. září 2020. Ze začátku byl vytvořen v jednoduché \hyperref[sub:one-server]{jedno-serverovou} architektuře.
+Portál byl uveden do ostrého provozu 6 dní od začátku jeho vývoje, konkrétně 27. září 2020.
+Ze začátku byl provozován v \hyperref[sub:one-server]{jedno-serverovou} architektuře.
+Od 2. řijna 2020 jsme převedli portál na robustnější \hyperref[sub:multi-server]{více-serverovou architekturu}
+abychom po technické stránce snáze zvládli nápor návštěvníků. 
 
-V prostředí portálu proběhlo celkem 142 on-line burz ve dvou hlavních vlnách od 7. do 14.12.2020 – hlavní vlna a potom 13.-20.1.2021,
+V prostředí portálu proběhlo celkem 142 on-line burz ve dvou hlavních vlnách od 7. do 14.12.2020 \emdash hlavní vlna a potom 13.-20.1.2021,
 ve kterých se uskutečnilo přibližně 15 tisíc propojení mezi školou a zájemcem. 
-Od 2. řijna 2020 jsme převedli portál na robustnější \hyperref[sub:multi-server]{více-serverovou architekturu} abychom po technické stránce snáze zvládli nápor návštěvníků. 
-
-Ve špičce provozu aplikace \bso{} využíval \hyperref[sub:load-balancing]{load-balancer} asi 30\si{Mb/S} síťového provozu.
-Systém v~tu dobu navštívilo asi 790 návštěvníků, tj.\ kolem 25 návštěvníků na školu\footnote{Čísla nejsou exaktní z~důvodu nemožnosti přesného měření návštěvnosti webových stránek.}.
 
 Přes vánoční svátky jsme projekt zásadním způsobem rozšířili.
-Vytvořili jsme crawlery, které získaly data z veřejně dostupných databází a tato data začali zobrazovat. Konkrétně: 
+Vytvořili jsme \glspl{crawler}, které získaly data z veřejně dostupných databází a tato data začali zobrazovat. Konkrétně: 
 
 \begin{itemize}
   \item z rejstříku škol \acrshort{msmt} jsme dohráli všechny existující střední školy a jejich obory (tak, aby uchazeč hledající na našich burzách viděl i základní informace o školách, které patří do okresu, ale k burze nejsou zaregistrované)
