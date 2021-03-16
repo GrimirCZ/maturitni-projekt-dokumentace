@@ -1,3 +1,4 @@
 build/
 src/*.log
+src/.*
 .DS_Store
