@@ -1,5 +1,3 @@
-% TODO: vymyslet lepší nadpisy
-
 \section{Postup projektu}
 
 V této sekci je popsáno praktické nasazení projektu \bso{}.
@@ -12,18 +10,18 @@ Jelikož celá infrastruktura běží na jednom serveru narážíme na velké be
 To také znamená, že není možné aplikaci aktualizovat bez jejího výpadku. 
 
 Druhým, i když menším problémem, je omezení možnosti škálování v~odpovědi na nárůst požadavků, jelikož pro alokaci větších serverových prostředků je nutné server vypnout.
-Pro aplikaci \bso{} toto nepředstavovalo velký problém jelikož jazyk \acrshort{php} je velice efektivní ve využívání serverových prostředků a provoz aplikace nepřekročil alokované serverové prostředky.
+Pro aplikaci \bso{} toto nepředstavovalo velký problém, jelikož jazyk \acrshort{php} je velice efektivní ve využívání serverových prostředků a provoz aplikace nepřekročil alokované serverové prostředky.
 
 \subsection{Více-serverové nasazení}\label{sub:multi-server}
 
-Pro vyřešení tohoto problému byla \hyperref[fig:servery]{infrastruktura byla rozšířena} na více serverů. 
+Pro vyřešení tohoto problému byla \hyperref[fig:servery]{infrastruktura rozšířena} na více serverů. 
 
 Jako vstupní bod infrastruktury byl vyčleněn server označen \textit{gateway}.
 Mezi hlavní role tohoto serveru byly určeny \hyperref[sub:load-balancing]{load-balancer} a vstupní bod protokolů \acrshort{http} a \acrshort{ws}.
 To nám dovoluje provádět provizi ssl certifikátů a ssl terminaci pouze v jednom místě naší infrastruktury.
 
-Jelikož \textit{gateway} poskytuje služby \hyperref[sub:load-balancing]{load-balanceru} mohlo být vytvořeno několik, na sobě nezávyslých, instancí aplikace \bso{}.
-Pro provedení tohoto kroku bylo zapotřebí rozčlenit všechny zdroje dat, např. \acrshort{rdbms} nebo ukládání souborů, na dedikované servery, jelikož aplikační servery nemohou tyto služby mezi sebou sdílet.
+Jelikož \textit{gateway} poskytuje služby \hyperref[sub:load-balancing]{load-balanceru} mohlo být vytvořeno několik, na sobě nezávislých instancí, aplikace \bso{}.
+Pro provedení tohoto kroku bylo zapotřebí rozčlenit všechny zdroje dat, např. \acrshort{rdbms} nebo ukládání souborů na dedikované servery, jelikož aplikační servery nemohou tyto služby mezi sebou sdílet.
 Jako \acrshort{rdbms} byla využita spravovaná databáze společnosti Digitalocean s replikací a automatickou správou redundantních serverů.
 Na ukládání souborů bylo využito objektové úložiště Amazon S3 pro manipulaci se soubory ze všech aplikačních serverů najednou, bez potřeby vlastní infrastruktury.
 
@@ -33,15 +31,15 @@ Také nám dovoluje aplikaci škálovat bez potřeby její odstávky.
 \subsection{Problém s pracovními vlákny load-balanceru Nginx}\label{sub:poor-nginx}
 
 Při prvním veřejné výstavě uspořádané skrze platformu \bso{} docházelo při požadavcích na server k výpadkům a překročení časového limitu požadavku.
-Po konzultaci souboru \verb|/var/log/nginx/access.log| bylo zjištěno, že na serveru \textit{gateway} došlo k vyčerpání \acrshort{fd}.
-To vedlo k nemožnosti spracování požadavků serverem.
+Po kontrole souboru \verb|/var/log/nginx/access.log| bylo zjištěno, že na serveru \textit{gateway} došlo k vyčerpání \acrshort{fd}.
+To vedlo k nemožnosti zpracování požadavků serverem.
 
-Pokud není webový server schopný odpovědět v časovém limitu zobrazí webový prohlížeč stránku jako nedostupnou,
+Pokud není webový server schopný odpovědět v časovém limitu, zobrazí webový prohlížeč stránku jako nedostupnou,
 jelikož webové prohlížeče implementují časový limit pro požadavky\cite{browser-timeout}.
 
-Pro opravu této chyby bylo zapotřebí zvýšit počet požadavků spracovávaných jedním pracovním vláknem a horní limit \acrshort{fd}.
+Pro opravu této chyby bylo zapotřebí zvýšit počet požadavků zpracovávaných jedním pracovním vláknem a horní limit \acrshort{fd}.
 Tyto změny byly provedeny v souboru \verb|/etc/nginx/nginx.conf|.
-Zvýšení počtu požadavků, které je schopné jedno pracovní vlákno spracovat bylo provedeno použitím direktivy:
+Zvýšení počtu požadavků, které je schopné jedno pracovní vlákno zpracovat bylo provedeno použitím direktivy:
 \begin{verbatim}
 events {
       worker_connections <počet připojení>;
@@ -57,7 +55,7 @@ Pro zvýšení horního limitu \acrshort{fd} byla použita direktiva \verb|worke
 
 Portál byl uveden do ostrého provozu 6 dní od začátku jeho vývoje, konkrétně 27. září 2020.
 Ze začátku byl provozován v \hyperref[sub:one-server]{jedno-serverovou} architektuře.
-Od 2. řijna 2020 jsme převedli portál na robustnější \hyperref[sub:multi-server]{více-serverovou architekturu}
+Od 2. řijna 2020 jsme převedli portál na robustnější \hyperref[sub:multi-server]{více-serverovou architekturu},
 abychom po technické stránce snáze zvládli nápor návštěvníků. 
 
 V prostředí portálu proběhlo celkem 142 on-line burz ve dvou hlavních vlnách od 7. do 14.12.2020 \textemdash{} hlavní vlna a potom 13. \textemdash{} 20.1.2021,
@@ -73,10 +71,10 @@ Vytvořili jsme \glspl{crawler}, které získaly data z veřejně dostupných da
   \item z portálu České školní inspekce jsme dohráli všechny inspekční zprávy škol
 \end{itemize}
 
-V době největších špiček bylo v jeden okamžik k portálu připojených přes 300 uživatelů 
+V době největších špiček bylo v jeden okamžik k portálu připojených přes 300 uživatelů, 
 a za necelého půl roku jeho existence se k němu připojilo přes 66 tisíc unikátních uživatelů,
 kteří si zobrazili přes 686 tisíc stránek.
-V současné době, kdy skončila pro střední školy \uv{náborová sezóna} je na serveru provoz již spíše sporadický (řádově nižší stovky zobrazených stránek denně). 
+V současné době, kdy skončila pro střední školy \uv{náborová sezóna}, je na serveru provoz již spíše sporadický (řádově nižší stovky zobrazených stránek denně). 
 
 
 \begin{figure}[H]
@@ -100,7 +98,7 @@ kdy jediný dopis informačním a poradenským střediskům přinesl zapojení v
 
 \subsection{Přínos aplikace}
 
-Přínos aplikace jsme rozdělili do hlavních šesti bodů:
+Přínos aplikace jsme rozdělili do hlavních pěti bodů:
 
 \begin{enumerate}
   \item Vymysleli jsme nový kanál pro komunikaci mezi uchazeči a středními školami, který v době pandemie alespoň částečně nahradil klasické prezenční výstavy středních škol.
@@ -117,7 +115,7 @@ Přínos aplikace jsme rozdělili do hlavních šesti bodů:
     Přes portál proběhlo přes 43 tisíc pokusů o on-line propojení mezi návštěvníky a školou.
     Podle zkušenosti z naší školy byl poměr mezi těmito pokusy a skutečnými smysluplnými připojeními přibližně 3:1. 
 
-  \item Zajistili jsme zachování našich přínosů i do budoucna. Funkcionalitu portálu v současné době zapojujeme do předního českého portálu pro vyhledávání škol s historií od roku 2012.
+  %\item Zajistili jsme zachování našich přínosů i do budoucna. Funkcionalitu portálu v současné době zapojujeme do předního českého portálu pro vyhledávání škol s historií od roku 2012.
   %\item Vytvořili jsme prostor pro naše mladší spolužáky, aby mohli zlepšovat své programátorské dovednosti na nějakém reálném projektu.
   %\item Pomohli jsme vylepšit rozpočet naší školy o cca 750 tisíc Kč.
 \end{enumerate}

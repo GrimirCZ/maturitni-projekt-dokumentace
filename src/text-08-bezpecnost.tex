@@ -2,12 +2,12 @@
 
 Kapitola zaměřená na zabezpečení projektu \bso{} je z~důvodu komplexity tématu rozdělena na dvě části.
 První část pojednává o~zabezpečení systému proti útokům vedeným skrze samotnou aplikaci, např. útokům typu \emph{\acrshort{sql} Injection}.
-Druhá kapitola se zaměří na zabezpečení infrastruktury proti útokům vedeným z~internetu cílících na špatně nakonfigurované služby,
+Druhá kapitola je zaměřena na zabezpečení infrastruktury proti útokům vedeným z~internetu cílících na špatně nakonfigurované služby,
 např. \emph{Útok na \acrshort{ssh} přihlašování serveru}.
 
 \subsection{Aplikační zabezpečení}
 
-Hlavní nebezpečí při provozování webového portálu, plyne z~práce s~uživatelským vstupem.
+Hlavní nebezpečí při provozování webového portálu plyne z~práce s~uživatelským vstupem.
 Aplikace musí tento vstup přijímat a operovat nad ním. To může vést k~celé řadě útoků.
 Je tedy důležité, aby uživatel svým vstupem nemohl webovou aplikaci napadnout, zpomalit, ani jinak vyřadit z~provozu.
 Nejdříve se zaměříme na bezpečnost textových polí a útoky s~nimi spojenými.
@@ -34,7 +34,7 @@ Cross-site skriptování\cite{xss}, nebo také \acrshort{xss}, je typ útoku, p�
 Tento útok představuje pro návštěvníky velké nebezpečí, jelikož může vést ke krádeži uživatelských přihlášení, zobrazování reklam nebo krádeži platebních údajů.
 Mezi stránkové skriptování\cite{xss} může být také využito jako mezikrok pro další, např. phishingové\cite{phishing}, útoky.
 
-Potenciálními místy, kde by mohlo u~aplikace \bso{} k~napadení XSS dojít, jsou jednořádková vstupní pole a grafické textové editory. Jednořádková vstupní pole slouží pro jednoduchý uživatelský vstup bez formátování. Zabezpečení je tedy velice jednoduché. Jakýkoliv vstup, který uživatel zadá, je očištěn a veškeré \acrshort{html} značky jsou odstraněny. U~grafických textových editorů však není tato obrana možná, jelikož validním vstupem je i \acrshort{html} kód. Aplikace tedy daný kód na serveru parsuje a odstraní veškeré závadné \acrshort{html} značky, jako je například značka \emph{script}, a závadné \acrshort{html} atributy, jako například \emph{onmove}.
+Potenciálními místy kde by mohlo u~aplikace \bso{} k~napadení XSS dojít, jsou jednořádková vstupní pole a grafické textové editory. Jednořádková vstupní pole slouží pro jednoduchý uživatelský vstup bez formátování. Zabezpečení je tedy velice jednoduché. Jakýkoliv vstup, který uživatel zadá, je očištěn a veškeré \acrshort{html} značky jsou odstraněny. U~grafických textových editorů však není tato obrana možná, jelikož validním vstupem je i \acrshort{html} kód. Aplikace tedy daný kód na serveru parsuje a odstraní veškeré závadné \acrshort{html} značky, jako je například značka \emph{script}, a závadné \acrshort{html} atributy, jako například \emph{onmove}.
 
 \subsubsection{Podvržení požadavků mezi stránkami}
 
@@ -50,21 +50,21 @@ Aplikace \emph{BurzaŠkol.Online} se brání podvržení požadavků tak, že pr
 
 Útok typu brute-force vede k~vyzrazení přihlašovacích údajů útočníkovi. Útočník tím získá možnost plné kontroly nad uživatelským účtem.
 
-Proti tomuto útoku je nasazena obrana spočívající v~limitaci počtu požadavků na \acrshort{ip} adresu. Pokud uživatel udělá za určený časový více požadavků na přihlášení než je povolený limit, tak aplikace požadavky zahazuje a dále je nezpracovává. Tato ochrana činí útoky typu brute-force velice nepraktické, až nemožné.
+Proti tomuto útoku je nasazena obrana spočívající v~limitaci počtu požadavků na \acrshort{ip} adresu. Pokud uživatel udělá za určený časový více požadavků na přihlášení než je povolený limit, aplikace požadavky zahazuje a dále je nezpracovává. Tato ochrana činí útoky typu brute-force velice nepraktické, až nemožné.
 
 \subsection{Zabezpečení infrastruktury}
 
 Dalším důležitým faktorem bezpečnosti, při provozování webového portálu, je zabezpečení serverové infrastruktury.
 Útoky na serverovou infrastrukturu aplikace mají často větší dopad než zranitelnosti aplikace samotné.
 Tyto útoky mají často za úkol aplikaci vyřadit z~provozu nebo ji zneužít.
-Jedná se, např. o~\emph{slovníkové útoky} nebo \emph{bruteforce útoky na \acrshort{ssh} přihlašování}.
+Jedná se, např. o~\emph{slovníkové útoky} nebo \emph{brute-force útoky na \acrshort{ssh} přihlašování}.
 
 \subsubsection{Útoky na SSH přihlašování}
 
 Při útoku na SSH přihlašování serveru se využívá povoleného přihlašování pomocí uživatelských hesel.
 Útok se snaží najít kombinace uživatelských jmen a hesel, které nejsou dostatečně komplexní a bezpečné.
 Častým cílem útoku je kořenový uživatel, \emph{root}, který by úspěšnému útočníkovi poskytl kompletní kontrolu nad cílovým strojem.
-K~prolomení hesel se využívají tzv.\ \expl{slovníkové útoky}{soubory velkého množství častých hesel, kterými se útočník snaží zabezpečení prolomit}.
+K~prolomení hesel se využívají tzv.\ \expl{slovníkové útoky}{soubory} velkého množství častých hesel, kterými se útočník snaží zabezpečení prolomit.
 
 Pokud dojde k~prolomení \acrshort{ssh} přihlášení serveru získá tím útočník plný přístup k~serverovému terminálu. Je tedy schopný vykonávat všechny akce, ke kterým má napadený účet oprávnění. Útočník může například zapojit stroj do botnetu\cite{botnet}, zfalšovat nebo zaměnit poskytované stránky, či ukrást platební nebo osobní údaje.
 

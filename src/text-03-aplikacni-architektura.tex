@@ -27,7 +27,7 @@ Laravel\cite{laravel} je \acrshort{php} \gls{framework} pro snadné tvoření ko
 
 \subsection{Webové sokety}
 
-Většina webových aplikací vyžaduje dříve či později nějakou \gls{real-time} funkcionalitu. Je mnoho způsobů, jak tuto funkcionalitu implementovat. Můžeme využít \Gls{http-polling}\cite{http-polling} nebo \Gls{http-sse}\cite{http-sse}. Velká slabina obou těchto přístupů je, že i když máme stále aktuální data ze serveru, tak neexistuje způsob, jak tyto metody využít pro odesílání požadavků na server. Je proto nutné udělat separátní \acrshort{http} požadavek, což je velice neefektivní.
+Většina webových aplikací vyžaduje dříve či později nějakou \gls{real-time} funkcionalitu. Je mnoho způsobů, jak tuto funkcionalitu implementovat. Můžeme využít \Gls{http-polling}\cite{http-polling} nebo \Gls{http-sse}\cite{http-sse}. Velká slabina obou těchto přístupů je, že i když máme stále aktuální data ze serveru, tak~neexistuje způsob, jak tyto metody využít pro odesílání požadavků na server. Je proto nutné udělat separátní \acrshort{http} požadavek, což je velice neefektivní.
 
 Protokol \acrfull{ws}\cite{ws} se tento problém snaží řešit poskytováním plně duplexní komunikace mezi klientským programem a serverem. Jelikož se jedná o~protokol cílený na použití ve webových prohlížečích, staví tento protokol nad protokolem \acrshort{http}, který používá pro \expl{navázání komunikace}{handshaking}. Využívá i stejné porty jako protokol \acrshort{http}, port 80 pro nešifrovanou a port 443 pro šifrovanou komunikaci.
 
@@ -38,6 +38,6 @@ Pusher\cite{pusher} je software stavějící nad \acrshort{ws} protokolem poskyt
 
 \subsection{Datový model}
 
-Datový model\cite{data-model} určuje způsob průtok dat, interakcí mezi daty a uložení dat aplikace. Od datového modelu se odvíjí většina aspektů aplikace, např. způsob fungování nebo rozložení formulářů a přehledů.
+Datový model\cite{data-model} určuje způsob průtok dat, interakcí mezi daty a uložení dat aplikace. Od datového modelu se odvíjí většina aspektů aplikace, např.~způsob fungování nebo rozložení formulářů a přehledů.
 
 Návrh datového modelu je jedna z~nejdůležitějších částí vývoje webové aplikace.  Pokud pří návrhu uděláme chybu můžeme si vývoj aplikace velice ztížit. Na druhou stranu dobře připravený datový model velice zjednodušuje vývoj aplikace, jelikož může sloužit jako referenční manuál pro její rozložení.

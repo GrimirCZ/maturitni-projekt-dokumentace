@@ -62,7 +62,7 @@ Když jsou modely a migrace úspěšně vytvořeny můžeme přistoupit k~vytvá
 
 Modely jsou \acrshort{php} třídy reprezentující samostatné databázové tabulky, řádky a relace mezi nimi. Modely nám dovolují vytvářet, upravovat a filtrovat záznamy jako by se jednalo o~nativní \acrshort{php} objekty. To velice zjednodušuje práci s~daty.
 
-V~současné době aplikace \bso{} obsahuje 26 modelů, např. \emph{School} pro vystavovatele nebo \emph{Region} pro kraj. 
+V~současné době aplikace \bso{} obsahuje 26 modelů, např.~\emph{School} pro vystavovatele nebo \emph{Region} pro kraj. 
 
 \subsubsection{Migrace}
 
@@ -92,4 +92,6 @@ U~jednoduchý stránek můžeme využít statických \acrshort{html} souborů, k
 
 Moderní webové aplikace vyžadují obsah dynamický, který je závislý na velké řadě faktorů, např. zda-li je uživatel přihlášen, jaká jsou jeho oprávnění, či jaké výstavy se právě konají. Obsah těchto stránek je většinou uživatelsky editovatelný za pomocí grafického \acrshort{wysiwyg} editoru.
 
-Pro generování těchto stránek se používají šablonovací nástroje jako samotné \acrshort{php} nebo různé pomocné knihovny jako Twig\cite{twig} nebo Laravel Blade Views\cite{laravel-blade}. Takové knihovny nám dovolují psát čisté \acrshort{html} s~přídavkem speciálních příkazů. Tyto příkazy nám dovolují například podmínečné generování, možnost vypisovat a formátovat \acrshort{php} proměnné nebo modularizaci stránek na menší znovupoužitelné komponenty.
+Pro generování těchto stránek se používají šablonovací nástroje jako samotné \acrshort{php} nebo různé pomocné knihovny jako Twig\cite{twig} nebo Laravel Blade Views\cite{laravel-blade}.
+Takové knihovny nám dovolují psát čisté \acrshort{html} s~přídavkem speciálních příkazů.
+Tyto příkazy nám dovolují například podmínečné generování nebo možnost vypisovat a formátovat \acrshort{php} proměnné.
