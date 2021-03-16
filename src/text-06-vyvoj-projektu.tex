@@ -1,6 +1,6 @@
 \section{Vývoj projektu}
 
-V~této sekci jsou popsány technologie využité při vývoji portálu \bso{} a důvody pro jejich výběr, postup vývoje projektu a získané zkušenosti.
+V~této sekci jsou popsány technologie využité při vývoji portálu \bso{} a důvody pro jejich výběr, postup vývoje projektu a získané zkušenosti s vývojem i samotným provozem.
 
 \subsection{Využité technologie}
 \label{sub:used-technologies}
@@ -26,7 +26,9 @@ Technologii Pusher byla vybrána z~důvodu jednoduché integrace do stávající
 
 \subsubsection{MySQL}
 
-\acrshort{rdbms} MySQL oproti ostatním relačním databázím vyniká jednoduchostí správy a množstvím poskytovatelů spravovaných databázových instancí\cite{mysql-vs-others}. To, a excelentní integrace s~jazykem \acrshort{php} a \gls{framework}em Laravel, z~ní dělá ideální volbu pro vývoj webových aplikací. Velkým přínosem je také široká řada nástrojů jako mysqldump\cite{mysqldump} nebo phpMyAdmin\cite{phpmyadmin}, které významně zjednodušují správu a provoz databáze MySQL.
+\acrshort{rdbms} MySQL oproti ostatním relačním databázím vyniká jednoduchostí správy a množstvím poskytovatelů spravovaných databázových instancí\cite{mysql-vs-others}.
+Výše uvedené, a excelentní integrace s~jazykem \acrshort{php} a \gls{framework}em Laravel, z~ní dělá ideální volbu pro vývoj webových aplikací.
+Velkým přínosem je také široká řada nástrojů jako mysqldump\cite{mysqldump} nebo phpMyAdmin\cite{phpmyadmin}, které významně zjednodušují správu a provoz databáze MySQL.
 
 \subsubsection{Amazon SES}
 
@@ -34,13 +36,20 @@ Technologii Pusher byla vybrána z~důvodu jednoduché integrace do stávající
 
 \subsection{Přípravy na vývoj projektu}
 
-Předtím než může započít vývoj \acrshort{sw} projektu je zapotřebí se zadavatelem vytvořit zadání. Jedná se o~dokument popisující jednotlivé konkrétní funkcionality a procesy aplikace. Ze zadání by měly vycházet veškeré části aplikace jako je datový model a použité technologie. \emph{Zadání by mělo být konkrétní a jednoznačné, pokud existuje více výkladů, může dojít k~velkým problémům při vývoji aplikace.} 
+Předtím než může započít vývoj \acrshort{sw} projektu je zapotřebí se zadavatelem vytvořit zadání.
+Jedná se o~dokument popisující jednotlivé konkrétní funkcionality a procesy aplikace. 
+Ze zadání by měly vycházet veškeré části aplikace jako je datový model a použité technologie.
+\emph{Zadání by mělo být konkrétní a jednoznačné, pokud existuje více výkladů, může dojít k~velkým problémům při vývoji aplikace.} 
 
-Dalším krokem je výběr technologií, které budou na vývoj projektu použity. Ze zadání určíme pro jakou platformu bude projektu určen, zda-li se jedná o~webovou, desktopovou, mobilní nebo serverovou aplikaci. Dle toho vybereme konkrétní technologie jako např Laravel\cite{laravel} pro vývoj aplikace, MySQL\cite{mysql} pro ukládání dat a Git\cite{git} pro správu zdrojového kódu.
+Dalším krokem je výběr technologií, které budou na vývoj projektu použity.
+Ze zadání určíme pro jakou platformu bude projektu určen, zda-li se jedná o~webovou, desktopovou, mobilní, serverovou nebo kombinovanou aplikaci.
+Dle toho vybereme konkrétní technologie jako např Laravel\cite{laravel} pro vývoj aplikace, MySQL\cite{mysql} pro ukládání dat a Git\cite{git} pro správu zdrojového kódu.
 
-Když jsou zvoleny technologie můžeme začít vytvářet datový model pro vybraný typ databáze. Dále rozvrhneme jednotlivé obrazovky a postupy, které bude aplikace obsahovat. Je také potřeba vytvořit plán nasazení projektu, tedy jak bude aplikace hostováná, či jaký mail server využijeme.
+Když jsou zvoleny technologie, můžeme začít vytvářet datový model pro vybraný typ databáze.
+Dále rozvrhneme jednotlivé obrazovky a postupy, které bude aplikace obsahovat.
+Je také potřeba vytvořit plán nasazení projektu, tedy jak bude aplikace hostováná, či jaký mail server využijeme.
 
-Když máme všechny přípravy hotovy můžeme přejít k~samotnému programování projektu.
+Když máme všechny přípravy hotovy, můžeme přejít k~samotnému programování projektu.
 
 \subsection{Vývoj projektu ve frameworku Laravel}
 \label{sub:laravel-development}

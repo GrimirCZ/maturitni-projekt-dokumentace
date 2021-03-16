@@ -4,20 +4,25 @@ Tato sekce popisuje prvky serverové infrastruktury, které jsou nasazeny v~reá
 
 \subsection{Load Balancery}\label{sub:load-balancing}
 
-Load balancer\cite{load-balancer} je prvek serverové infrastruktury určený k~rozložení příchozích požadavků na skupinu backendových serverů. K~rozložení požadavků je využíváno nejrůznějších algoritmů, jako například \gls{round-robin}, \gls{least-con}, či \gls{ip-hash}. Dělíme je na \acrshort{sw} load balancery a \acrshort{hw} load balancery. 
+Load balancer\cite{load-balancer} je prvek serverové infrastruktury určený k~rozložení příchozích požadavků na skupinu backendových serverů. K~rozložení požadavků je využíváno nejrůznějších algoritmů, například \gls{round-robin}, \gls{least-con}, či \gls{ip-hash}. Dělíme je na \acrshort{sw} load balancery a \acrshort{hw} load balancery. 
 
-\acrshort{hw} load balancery jsou zpravidla proprietární a nákladná řešení. Vysokého výkonu dosahují využitím dedikovaných \acrshort{hw} akcelerátorů. Jediné způsoby jejich škálování jsou zakoupení více fyzických strojů, či zakoupení silnějších strojů.
+\acrshort{hw} load balancery jsou zpravidla proprietární a nákladná řešení. Vysokého výkonu dosahují využitím dedikovaných \acrshort{hw} akcelerátorů. Jedinou možností jejich škálování je zakoupení více fyzických strojů, či zakoupení výkonějších strojů.
 
-\acrshort{sw} load balancery jsou distribuovány ve formě uživatelských aplikací spustitelných na běžném hardwaru, či ve virtuálních strojích cloudových providerů. Škálovatelnost je tedy velice triviální. V~porovnání s~\acrshort{hw} load balancery stačí pouze \gls{on-demand} zakoupit virtuální stroj s~odpovídajícím výpočetním výkonem.  Tato vlastnost činí z~\acrshort{sw} load balancerů velice flexibilní řešení, ideální pro agilní cloudové prostředí.
+\acrshort{sw} load balancery jsou distribuovány ve formě uživatelských aplikací spustitelných na běžném hardwaru, či ve virtuálních strojích cloudových providerů.
+Škálovatelnost je tedy velice triviální.
+V~porovnání s~\acrshort{hw} load balancery stačí pouze zakoupit \gls{on-demand} virtuální stroj s~odpovídajícím výpočetním výkonem.
+Tato vlastnost činí z~\acrshort{sw} load balancerů velice flexibilní řešení, ideální pro agilní cloudové prostředí.
 
 \subsection{Objektová úložiště}
 
 
-Objektové úložiště je typ úložiště určený k~ukládaní nestrukturovaných dat. Na rozdíl od tradičních způsobů ukládání dat, jakými jsou souborové systémy a bloková úložiště, pracují objektová úložiště\cite{object-storage} s~daty jako se samostatnými objekty. Každý objekt obsahuje data samotná, uložená v~jejich nativním formátu, a metadata. Metadata obsahují informace jako přístupová práva objektu, unikátní globální identifikátor a další přidružené informace, například formát uložených dat. Díky adresaci za pomocí globálních identifikátorů je možné objekty transparentně přesouvat. Tato vlastnost nám poskytuje nezávislost dat na použitém záznamovém médiu.
+Objektové úložiště je typ úložiště, určený k~ukládaní nestrukturovaných dat. Na rozdíl od tradičních způsobů ukládání dat, jakými jsou souborové systémy a bloková úložiště, pracují objektová úložiště\cite{object-storage} s~daty jako se samostatnými objekty. Každý objekt obsahuje data samotná, uložená v~jejich nativním formátu, a metadata. Metadata obsahují informace jako jsou přístupová práva objektu, unikátní globální identifikátor a další přidružené informace, například formát uložených dat. Díky adresaci za pomocí globálních identifikátorů je možné objekty transparentně přesouvat. Tato vlastnost nám poskytuje nezávislost dat na použitém záznamovém médiu.
 
 Je tedy například možné přesunout málo používané objekty z~diskového úložiště na úložiště založené na magnetické pásce. Na druhou stranu ale také můžeme transparentně přesunout často požadované objekty z~úložiště do pracovní paměti pro rychlý přístup.
 
-Objektová úložiště dovolují ukládání velkého objemu nestrukturovaných dat. Je proto ideální jako úložiště pro uživatelské obrázky, dokumenty a zálohy. Díky své flexibilitě jsou objektová úložiště výrazně levnější než například bloková úložiště.
+Objektová úložiště dovolují ukládání velkého objemu nestrukturovaných dat.
+Tato úložiště jsou proto ideální pro uživatelské obrázky, dokumenty a zálohy.
+Díky své flexibilitě jsou objektová úložiště výrazně levnější než například bloková.
 
 \subsection{Relační databáze}
 

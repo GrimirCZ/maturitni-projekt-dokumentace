@@ -41,7 +41,6 @@ jelikož webové prohlížeče implementují časový limit pro požadavky\cite{
 
 Pro opravu této chyby bylo zapotřebí zvýšit počet požadavků spracovávaných jedním pracovním vláknem a horní limit \acrshort{fd}.
 Tyto změny byly provedeny v souboru \verb|/etc/nginx/nginx.conf|.
-\pagebreak
 Zvýšení počtu požadavků, které je schopné jedno pracovní vlákno spracovat bylo provedeno použitím direktivy:
 \begin{verbatim}
 events {
@@ -61,7 +60,7 @@ Ze začátku byl provozován v \hyperref[sub:one-server]{jedno-serverovou} archi
 Od 2. řijna 2020 jsme převedli portál na robustnější \hyperref[sub:multi-server]{více-serverovou architekturu}
 abychom po technické stránce snáze zvládli nápor návštěvníků. 
 
-V prostředí portálu proběhlo celkem 142 on-line burz ve dvou hlavních vlnách od 7. do 14.12.2020 \emdash hlavní vlna a potom 13.-20.1.2021,
+V prostředí portálu proběhlo celkem 142 on-line burz ve dvou hlavních vlnách od 7. do 14.12.2020 \textemdash{} hlavní vlna a potom 13. \textemdash{} 20.1.2021,
 ve kterých se uskutečnilo přibližně 15 tisíc propojení mezi školou a zájemcem. 
 
 Přes vánoční svátky jsme projekt zásadním způsobem rozšířili.
@@ -75,25 +74,25 @@ Vytvořili jsme \glspl{crawler}, které získaly data z veřejně dostupných da
 \end{itemize}
 
 V době největších špiček bylo v jeden okamžik k portálu připojených přes 300 uživatelů 
-a za necelý půl roku jeho existence se k němu připojilo přes 66 tisíc unikátních uživatelů,
+a za necelého půl roku jeho existence se k němu připojilo přes 66 tisíc unikátních uživatelů,
 kteří si zobrazili přes 686 tisíc stránek.
 V současné době, kdy skončila pro střední školy \uv{náborová sezóna} je na serveru provoz již spíše sporadický (řádově nižší stovky zobrazených stránek denně). 
 
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{img/listopad-leden-navstevnost.png}
-\caption{Graf návštěvnosti portálu \bso{} od Listopadu 2020 do Ledna 2021}\label{fig:navstevnost}
+\caption{Graf návštěvnosti portálu \bso{} od listopadu 2020 do ledna 2021}\label{fig:navstevnost}
 \end{figure}
 
 \subsection{Zapojení škol}
 
-Během prvních 14-ti dní projektu se v Pardubickém Kraji, díky podpoře odboru školství, zapojilo více jak 60\% středních škol.
+Během prvních 14-ti dní projektu se v Pardubickém kraji, díky podpoře odboru školství, zapojilo více jak 60\% středních škol.
 V ostatních krajích bylo, i přes podporu \acrshort{msmt}, zapojení škol pouze sporadické.
-Pokrok ale nastal po zapojení Úřadu práce na celostátní úrovni, kdy jediný dopis informačním a poradenským střdiskům přinesl zapojení více než 250 škol z celé České Republiky.
-Zapojení úřadu práce nám také poskytlo další komunikační kanál se základními školami.
+Pokrok ale nastal po zapojení Úřadu práce na celostátní úrovni,
+kdy jediný dopis informačním a poradenským střediskům přinesl zapojení více než 250 škol z celé České Republiky.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{img/kraje-zapojeni.png}
 \caption{Zapojení škol v jednotlivých krajích}\label{fig:kraje-zapojeni}
@@ -101,7 +100,7 @@ Zapojení úřadu práce nám také poskytlo další komunikační kanál se zá
 
 \subsection{Přínos aplikace}
 
-Přínos aplikace jsem rozdělil do hlavních šesti bodů:
+Přínos aplikace jsme rozdělili do hlavních šesti bodů:
 
 \begin{enumerate}
   \item Vymysleli jsme nový kanál pro komunikaci mezi uchazeči a středními školami, který v době pandemie alespoň částečně nahradil klasické prezenční výstavy středních škol.
@@ -110,7 +109,7 @@ Přínos aplikace jsem rozdělil do hlavních šesti bodů:
   \item Agregovali jsme dosud nevyžité a opomíjené veřejné zdroje dat o školách (výsledky státních maturit, výsledky soutěží pořádaných \acrshort{msmt}, zprávy České školní inspekce)
     do  jednoho portálu a umožnili jsme porovnávání škol.
 
-  \item Dokázali jsme celý portál \uv{oživit}. Aktivně se do něj zapojilo 465 středních škol a učilišť z celé ČR (více než 1/3).
+  \item Dokázali jsme celý portál \uv{oživit}. Aktivně se do něj zapojilo 465 středních škol a učilišť z celé ČR (více než \(\frac{1}{3}\)).
     Informovali jsme o něm všechny základní školy v ČR.
 
   \item \uv{Navedli} jsme střední školy v ČR, aby zorganizovaly své dny otevřených dveří pomocí on-line konferencí.

@@ -1,19 +1,31 @@
-\section{Bezpečnost aplikace}
-\label{sec:security}
+\section{Bezpečnost aplikace}\label{sec:security}
 
-Kapitola zaměřená na zabezpečení projektu \bso{} je z~důvodu komplexity tématu rozdělena na dvě části.  První část pojednává o~zabezpečení systému proti útokům vedeným skrze samotnou aplikaci, např. útokům typu \emph{\acrshort{sql} Injection}. Druhá kapitola se zaměří na zabezpečení infrastruktury proti útokům vedeným z~internetu cílících na špatně nakonfigurované služby, např. \emph{Útok na \acrshort{ssh} přihlašování serveru}.
+Kapitola zaměřená na zabezpečení projektu \bso{} je z~důvodu komplexity tématu rozdělena na dvě části.
+První část pojednává o~zabezpečení systému proti útokům vedeným skrze samotnou aplikaci, např. útokům typu \emph{\acrshort{sql} Injection}.
+Druhá kapitola se zaměří na zabezpečení infrastruktury proti útokům vedeným z~internetu cílících na špatně nakonfigurované služby,
+např. \emph{Útok na \acrshort{ssh} přihlašování serveru}.
 
 \subsection{Aplikační zabezpečení}
 
-Hlavní nebezpečí při provozování Webového portálu, plyne z~práce s~uživatelským vstupem. Aplikace musí tento vstup přijímat a operovat nad ním. To může vést k~celé řadě útoků. Je tedy důležité, aby uživatel svým vstupem nemohl webovou aplikaci napadnout, zpomalit, ani jinak vyřadit z~provozu. Nejdříve se zaměříme na bezpečnost textových polí a útoky s~nimi spojenými.
+Hlavní nebezpečí při provozování webového portálu, plyne z~práce s~uživatelským vstupem.
+Aplikace musí tento vstup přijímat a operovat nad ním. To může vést k~celé řadě útoků.
+Je tedy důležité, aby uživatel svým vstupem nemohl webovou aplikaci napadnout, zpomalit, ani jinak vyřadit z~provozu.
+Nejdříve se zaměříme na bezpečnost textových polí a útoky s~nimi spojenými.
 
 \subsubsection{SQL Injection}
 
-\acrshort{sql} Injection\cite{sqlinject} je typ útoku, při kterém útočník zadá do textového vstupu kód v~jazyce \acrshort{sql}. Naše aplikace poté tento kód vezme a přímo ho vloží do řetězce dotazu.Při vykonávání příkazu pak databázový server vykoná tento škodlivý kód, jako by pocházel od samotné aplikace.
+\acrshort{sql} Injection\cite{sqlinject} je typ útoku, při kterém útočník zadá do textového vstupu kód v~jazyce \acrshort{sql}.
+Naše aplikace poté tento kód vezme a přímo ho vloží do řetězce dotazu.
+Při vykonávání příkazu pak databázový server vykoná tento škodlivý kód, jako by pocházel od samotné aplikace.
 
 Tento útok představuje velké nebezpečí, jelikož může vést od ztráty dat, až k~úniku citlivých dat do rukou útočníka.
 
-Aplikace \bso{} se proti tomuto typu útoku brání pomocí \emph{předpřipravených dotazů}\cite{mysqlprepstmt}. Jedná se o~techniku, kdy je databázový dotaz rozdělen na dvě části. První část tvoří samotné příkazy, které popisují, jak bude daný dotaz proveden. Druhou část tvoří uživatelské vstupy. Tato část obsahuje pouze data a databázový server ji nikdy nespouští. Tím zabraňuje tomu, aby server vykonal uživatelský vstup jako příkaz. \emph{Předpřipravené dotazy}\cite{mysqlprepstmt} riziko tohoto útoku plně eliminují.
+Aplikace \bso{} se proti tomuto typu útoku brání pomocí \expl{\emph{předpřipravených dotazů}\cite{mysqlprepstmt}}{rozdělení dotazu na dvě části}.
+První část tvoří příkaz, který popisuje, jak bude daný dotaz proveden.
+Druhou část tvoří uživatelské vstupy.
+Tato část obsahuje pouze data a databázový server ji nikdy nespouští.
+Tím zabraňuje tomu, aby server vykonal uživatelský vstup jako příkaz.
+\emph{Předpřipravené dotazy}\cite{mysqlprepstmt} riziko tohoto útoku plně eliminují.
 
 \subsubsection{Cross-site skriptování}
 
@@ -42,39 +54,52 @@ Proti tomuto útoku je nasazena obrana spočívající v~limitaci počtu požada
 
 \subsection{Zabezpečení infrastruktury}
 
-Dalším důležitým faktorem bezpečnosti, při provozování webového portálu, je zabezpečení serverové infrastruktury. Útoky na serverovou infrastrukturu aplikace mají často větší dopad než zranitelnosti aplikace samotné. Tyto útoky mají často za úkol aplikaci vyřadit z~provozu nebo ji zneužít. Jedná se, např. o~\emph{slovníkové útoky nebo bruteforce útoky na \acrshort{ssh} přihlašování} nebo o~\emph{denial of service} útoky.
+Dalším důležitým faktorem bezpečnosti, při provozování webového portálu, je zabezpečení serverové infrastruktury.
+Útoky na serverovou infrastrukturu aplikace mají často větší dopad než zranitelnosti aplikace samotné.
+Tyto útoky mají často za úkol aplikaci vyřadit z~provozu nebo ji zneužít.
+Jedná se, např. o~\emph{slovníkové útoky} nebo \emph{bruteforce útoky na \acrshort{ssh} přihlašování}.
 
 \subsubsection{Útoky na SSH přihlašování}
 
-Při útoku na SSH přihlašování serveru se využívá povoleného přihlašování pomocí uživatelských hesel. Útok se snaží najít kombinace uživatelských jmen a hesel, které nejsou dostatečně komplexní a bezpečné. Častým cílem útoku je kořenový uživatel, \emph{root}, který by úspěšnému útočníkovi poskytl kompletní kontrolu nad cílovým strojem. K~prolomení hesel se využívají tzv.\ slovníkové útoky - soubory velkého množství častých hesel, kterými se útočník snaží zabezpečení prolomit.
+Při útoku na SSH přihlašování serveru se využívá povoleného přihlašování pomocí uživatelských hesel.
+Útok se snaží najít kombinace uživatelských jmen a hesel, které nejsou dostatečně komplexní a bezpečné.
+Častým cílem útoku je kořenový uživatel, \emph{root}, který by úspěšnému útočníkovi poskytl kompletní kontrolu nad cílovým strojem.
+K~prolomení hesel se využívají tzv.\ \expl{slovníkové útoky}{soubory velkého množství častých hesel, kterými se útočník snaží zabezpečení prolomit}.
 
 Pokud dojde k~prolomení \acrshort{ssh} přihlášení serveru získá tím útočník plný přístup k~serverovému terminálu. Je tedy schopný vykonávat všechny akce, ke kterým má napadený účet oprávnění. Útočník může například zapojit stroj do botnetu\cite{botnet}, zfalšovat nebo zaměnit poskytované stránky, či ukrást platební nebo osobní údaje.
 
-Jednou z~hlavních obran proti tomuto útoku je zákaz používaní hesel pro vzdálený přístup. K~přihlašování se poté využívá tzv. \acrshort{ssh} klíčů\cite{ssh-keys} - certifikátů založených na asymetrické kryptografii. Druhou linií obrany je poté rozřazení jednotlivých úloh pod samostatné uživatelské účty a princip minimálních oprávnění. Toto opatření pak minimalizuje škody způsobené útočníkem na úzkou napadenou oblast. 
+Jednou z~hlavních obran, kterou využívají servery projektu \bso{}, proti tomuto útoku je zákaz používaní hesel pro vzdálený přístup.
+K~přihlašování se poté využívá tzv. \expl{\acrshort{ssh} klíčů\cite{ssh-keys}}{certifikátů založených na asymetrické kryptografii}.
+Druhou linií obrany je poté rozřazení jednotlivých úloh pod samostatné uživatelské účty a princip minimálních oprávnění.
+Toto opatření pak minimalizuje škody způsobené útočníkem na úzkou napadenou oblast. 
 
-\subsubsection{Denial of service útoky}
-
-Útoky typu \acrfull{dos}\cite{denial-of-service} jsou útoky při kterých se útočník snaží zahltit naši infrastrukturu, a tím způsobit její výpadek.
-Nejčastější variantou \acrshort{dos} útoku je \acrfull{ddos} - \acrshort{dos} útok vedený z~mnoha míst najednou \cite{distributed-denial-of-service}. 
-Vyskytují se ve velkém množství variací, např. Slowloris, různé typy floodingu a amplifikační útoky.
-
-\subsubsubsection{Slowloris útoky}
-
-\noindent
-\acrshort{dos} útok Slowloris\cite{slowloris} využívá toho, že každé připojení vyžaduje, tzv. \acrfull{fd}\cite{fd}. \acrshort{fd} je systémový zdroj, který v~unixových systémech reprezentuje otevřené soubory, či síťová připojení. Každý běžící proces má omezený počet \acrshort{fd}, které je schopný otevřít v~jednu chvíli. Cílem útoku Slowloris je donutit webserver k~vyčerpání počtu dostupných \acrshort{fd} tím, že otevře velkou spoustu připojení a zasílá pouze tolik dat, aby server připojení neuzavřel. Snaží se tak napodobit spoustu zařízení s~pomalým připojením. Když dojde k~vyčerpání volných \acrshort{fd} ztratí server schopnost přijímat nové požadavky a na koncového uživatele působí jako přetížený. Hlavní výhoda tohoto útoku je, že nevyžaduje větší prostředky ke svému provedení. Hlavní obranu proti útoku tvoří omezení maximálního množství připojení na \acrshort{ip} adresu. Je také nutné nastavit rozumnou spodní hranici rychlosti připojení.
-
-\subsubsubsection{Floodingové útoky}
-\label{subsec:ddos-flood-attack}
-
-\noindent
-Floodingové \acrshort{ddos} útoky jsou založené na přetížení cílového stroje. Jejich cílem je překročení maximální propustnosti \acrshort{hw} a \acrshort{sw} komponent serveru, a tím způsobit nedostupnost, výpadek, či dokonce fyzické poškození. Tento útok využívá nedokonalosti různých protokolů a jejich implementací. Příkladem floodingových útoků je UDP flood\cite{udp-flood}, SYN flood\cite{syn-flood} nebo HTTP flood\cite{http-flood}.
-
-\subsubsubsection{Amplifikační útoky}
-
-\noindent
-Amplifikační \acrshort{ddos} útoky jsou variantou \hyperref[subsec:ddos-flood-attack]{floodingových útoků} využívající základní internetové služby, jejichž velikost odpovědi je několikanásobně větší než velikost požadavku. U~některých dotazů je poměr až 1:200 \cite{ddos-amplify-ratio}. Hlavními cíli amplifikačních útoků jsou nechráněné \acrshort{ntp} servery\cite{ddos-amplify-ratio} a \acrshort{dns} servery\cite{dns-flood}. Při útoku se využívá faktu, že některé \acrshort{ntp} a \acrshort{dns} servery přijímají požadavky pomocí \acrshort{udp} protokolu, bez kontroly pravosti zpáteční \acrshort{ip} adresy. Útočník zašle malý \acrshort{udp} požadavek s~podvrženou \acrshort{ip} adresou cílového serveru. Zranitelný server poté odpoví na podvrženou \acrshort{ip} adresu a provede \acrshort{udp} flood útok pod záminkou odpovědi na legitimní dotaz.
-
-\subsubsubsection{Obrana proti floodingovým a amplifikačním útoků}
-
-\noindent
-Obrana proti floodingovým a amplifikačním útokům je velice náročná. Jeden z~největších problémů je fakt, že škodlivý datový provoz je v~mnohých případech těžce rozeznatelný od normálního datového provozu aplikace. Je proto potřeba izolovat útočící \acrshort{ip} adresy od \acrshort{ip} adres legitimních uživatelů. Problém s~blokací škodlivého provozu těchto útoků je, že samotný objem blokovaných dat má potenciál naši infrastrukturu přetížit. Ideálním, i když nákladným, řešením jsou fyzické firewally, které upravují provoz pomocí hardwarových akcelerátorů. Méně efektivními, ale stále užitečnými, možnostmi je alokace větších serverových prostředků na místa, kde naše služby komunikují s~veřejným internetem, v~kombinaci s~blokováním útočících \acrshort{ip} adres. 
+%\subsubsection{Denial of service útoky}
+%
+%Útoky typu \acrfull{dos}\cite{denial-of-service} jsou útoky při kterých se útočník snaží zahltit naši infrastrukturu, a tím způsobit její výpadek.
+%Nejčastější variantou \acrshort{dos} útoku je \acrfull{ddos} - \acrshort{dos} útok vedený z~mnoha míst najednou \cite{distributed-denial-of-service}. 
+%Vyskytují se ve velkém množství variací, např. Slowloris, různé typy floodingu a amplifikační útoky.
+%
+%\subsubsubsection{Slowloris útoky}
+%
+%\noindent
+%\acrshort{dos} útok Slowloris\cite{slowloris} využívá toho, že každé připojení vyžaduje, tzv. \acrfull{fd}\cite{fd}. \acrshort{fd} je systémový zdroj, který v~unixových systémech reprezentuje otevřené soubory, či síťová připojení. Každý běžící proces má omezený počet \acrshort{fd}, které je schopný otevřít v~jednu chvíli. Cílem útoku Slowloris je donutit webserver k~vyčerpání počtu dostupných \acrshort{fd} tím, že otevře velkou spoustu připojení a zasílá pouze tolik dat, aby server připojení neuzavřel. Snaží se tak napodobit spoustu zařízení s~pomalým připojením. Když dojde k~vyčerpání volných \acrshort{fd} ztratí server schopnost přijímat nové požadavky a na koncového uživatele působí jako přetížený. Hlavní výhoda tohoto útoku je, že nevyžaduje větší prostředky ke svému provedení. Hlavní obranu proti útoku tvoří omezení maximálního množství připojení na \acrshort{ip} adresu. Je také nutné nastavit rozumnou spodní hranici rychlosti připojení.
+%
+%\subsubsubsection{Floodingové útoky}
+%\label{subsec:ddos-flood-attack}
+%
+%\noindent
+%Floodingové \acrshort{ddos} útoky jsou založené na přetížení cílového stroje. Jejich cílem je překročení maximální propustnosti \acrshort{hw} a \acrshort{sw} komponent serveru, a tím způsobit nedostupnost, výpadek, či dokonce fyzické poškození. Tento útok využívá nedokonalosti různých protokolů a jejich implementací. Příkladem floodingových útoků je UDP flood\cite{udp-flood}, SYN flood\cite{syn-flood} nebo HTTP flood\cite{http-flood}.
+%
+%\subsubsubsection{Amplifikační útoky}
+%
+%\noindent
+%Amplifikační \acrshort{ddos} útoky jsou variantou \hyperref[subsec:ddos-flood-attack]{floodingových útoků} využívající základní internetové služby, jejichž velikost odpovědi je několikanásobně větší než velikost požadavku. U~některých dotazů je poměr až 1:200 \cite{ddos-amplify-ratio}. Hlavními cíli amplifikačních útoků jsou nechráněné \acrshort{ntp} servery\cite{ddos-amplify-ratio} a \acrshort{dns} servery\cite{dns-flood}. Při útoku se využívá faktu, že některé \acrshort{ntp} a \acrshort{dns} servery přijímají požadavky pomocí \acrshort{udp} protokolu, bez kontroly pravosti zpáteční \acrshort{ip} adresy. Útočník zašle malý \acrshort{udp} požadavek s~podvrženou \acrshort{ip} adresou cílového serveru. Zranitelný server poté odpoví na podvrženou \acrshort{ip} adresu a provede \acrshort{udp} flood útok pod záminkou odpovědi na legitimní dotaz.
+%
+%\subsubsubsection{Obrana proti floodingovým a amplifikačním útoků}
+%
+%\noindent
+%Obrana proti floodingovým a amplifikačním útokům je velice náročná.
+%Jeden z~největších problémů je fakt, že škodlivý datový provoz je v~mnohých případech těžce rozeznatelný od normálního datového provozu aplikace.
+%Je proto potřeba izolovat útočící \acrshort{ip} adresy od \acrshort{ip} adres legitimních uživatelů.
+%Problém s~blokací škodlivého provozu těchto útoků je, že samotný objem blokovaných dat má potenciál naši infrastrukturu přetížit.
+%Ideálním, i když nákladným, řešením jsou fyzické firewally, které upravují provoz pomocí hardwarových akcelerátorů. Méně efektivními, ale stále užitečnými, možnostmi je alokace větších serverových prostředků na místa, kde naše služby komunikují s~veřejným internetem, v~kombinaci s~blokováním útočících \acrshort{ip} adres. 

@@ -18,9 +18,13 @@
 \usepackage{float}
 \usepackage{caption}
 \usepackage{glossaries}
+\usepackage{titlesec}
 
 \addbibresource{text.bib}
 
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+% \titlespacing*{⟨command ⟩}{⟨left ⟩}{⟨before-sep ⟩}{⟨after-sep ⟩}[⟨right-sep ⟩]
+\titlespacing*{\chapter}{0pt}{5pt}{20pt}
 
 \titlecz{Webový portál BurzaŠkol.Online}
 \titleen{BurzaŠkol.Online Web Portal}
@@ -32,7 +36,7 @@
 
 % Změňte, pokud se liší
 \region{Pardubický}
-\placefooter{Pardubice 2020}
+\placefooter{Pardubice 2021}
 
 \input{prikazy}
 
@@ -48,9 +52,9 @@
 	\makecopyrightstatement{V~Pardubichích}
 	
 	\makethanks{Děkuji svému školiteli RNDr. Janu Koupilovi, Ph.D. za obětavou pomoc, podnětné připomínky a nekonečnou trpělivost, kterou mi během práce poskytoval. \
-  Dále bych chtěl poděkovat panu Jiřímu Formánkovy za poskytnutí myšlenky projektu, podmětů a propagace projektu.\
+  Dále bych chtěl poděkovat panu Jiřímu Formánkovy za poskytnutí myšlenky projektu, podnětů a propagace projektu.\
   \par \
-  Na závěr bych chtěl poděkovat pánům Matějovy Půhonému a akademickému malíři~Danielu~Václavíkovy za grafický návrh a pomoc s grafickou stránkou projektu.}
+  Na závěr bych chtěl poděkovat pánům Matěji Půhonému a akademickému malíři~Danielu~Václavíkovi za grafický návrh a pomoc s grafickou stránkou projektu.}
 	
 	\pagestyle{empty}
 	
@@ -63,7 +67,7 @@
 	\vspace{20mm}
 	
 	\section*{Annotation}
-	The goal of this work is to create an online platform that will allow the replacement of traditional school exchanges in the Czech Republic using modern web technologies during the Covid-19 pandemic. This platform mediates contact between secondary schools and pupils in the 9th grade of primary schools, at a time when traditional school exchanges are impossible due to hygienic restritions.
+	The goal of this work is to create an online platform that will allow the replacement of traditional school presentation fairs in the Czech Republic using modern web technologies during the Covid-19 pandemic. This platform mediates contact between secondary schools and pupils in the 9th grade of primary schools at a time when traditional school exchanges are impossible due to hygienic restrictions.
 
 	\subsection*{Keywords}
 	school exchange; web page; www; online; online platform
@@ -71,7 +75,7 @@
 	\newpage
 	\pagestyle{plain}
 	
-    \tableofcontents % vysází obsah
+  \tableofcontents % vysází obsah
 	
 	%%% Začátek práce
 	\setcounter{figure}{0}

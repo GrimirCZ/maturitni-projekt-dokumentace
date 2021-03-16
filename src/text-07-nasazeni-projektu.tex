@@ -1,16 +1,21 @@
-\section{Nasazení a provoz projektu}
-\label{sec:deployment-running}
+\section{Nasazení a provoz projektu}\label{sec:deployment-running}
 
-Tato kapitola je věnována nasazení a provozu projektu \bso{}. Popisuje volbu hostingové služby a důvody k~ní vedoucí, serverovou architekturu a obsahuje také poznatky a překonané problémy, které v~průběhu nasazování projektu vznikli.
+Tato kapitola je věnována nasazení a provozu projektu \bso{}.
+Popisuje volbu hostingové služby a serverovou architekturu.
+Obsahuje také poznatky a překonané problémy, které v~průběhu nasazování projektu vznikli.
 
 \subsection{Hostingová služba}
 \label{sub:hosting}
 
-Při navrhování projektu \bso{} byly zvažovány služby Amazon AWS\cite{amazon-aws}, Microsoft Azure\cite{ms-azure} a cloudem společnosti Digitalocean\cite{digitalocean}. Všechny tři služby poskytují velké množství pokročilých funkcí pro vývoj a provoz webových aplikací. 
+Při navrhování projektu \bso{} byly zvažovány služby Amazon AWS\cite{amazon-aws}, Microsoft Azure\cite{ms-azure} a cloudem společnosti Digitalocean\cite{digitalocean}.
+Všechny tři služby poskytují velké množství pokročilých funkcí pro vývoj a provoz webových aplikací. 
 
-Nakonec byl pro většinu funkcí zvolen cloud společnosti Digitalocean, jelikož má ze všech tří poskytovatelů nejjednodušší správu a finanční politiku, je přesně uvedeno za co platíte a neexistují žádné skryté limity a kvóty. Mezi další výhody cloudu Digitalocean patří vysoký výkon a velmi příznivé ceny.\cite{digitalocean-advantages}
+Nakonec byl pro většinu funkcí zvolen cloud společnosti Digitalocean, jelikož má ze všech tří poskytovatelů nejjednodušší správu a finanční politiku,
+je přesně uvedeno za co platíte a neexistují žádné skryté limity a kvóty.
+Mezi další výhody cloudu Digitalocean patří vysoký výkon a velmi příznivé ceny.\cite{digitalocean-advantages}
 
-Pro další funkcionality jako ukládání souborů a zasílání emailů byly využity služby Amazon S3\cite{amazon-s3} a Amazon SES\cite{amazon-ses}. Důvody pro toto rozhodnutí byly bezkonkurenční ceny a integrace s~použitými technologiemi, hlavně \gls{framework}em \nameref{subsub:laravel}.
+Pro další funkcionality jako ukládání souborů a zasílání emailů byly využity služby Amazon S3\cite{amazon-s3} a Amazon SES\cite{amazon-ses}.
+Důvody pro toto rozhodnutí byly bezkonkurenční ceny a integrace s~použitými technologiemi, hlavně \gls{framework}em \nameref{subsub:laravel}.
 
 
 \begin{figure}[!ht]
@@ -27,11 +32,11 @@ Pro další funkcionality jako ukládání souborů a zasílání emailů byly v
 \emptyLine
 
 \begin{displayquote}
-Internet je divokým a nebezpečným místem\cite{internet-is-dangerous-place}.
+\textit{Internet je divokým a nebezpečným místem\cite{internet-is-dangerous-place}.}
 \end{displayquote}
 
 \begin{displayquote}
-\acrlong{sw} a \acrlong{hw} je nespolehlivý, chyba není výjimka ale pravidlo\cite{failure-is-rule-not-exception}.
+\textit{\acrlong{sw} a \acrlong{hw} je nespolehlivý, chyba není výjimka ale pravidlo\cite{failure-is-rule-not-exception}.}
 \end{displayquote}
 
 \emptyLine
@@ -40,9 +45,13 @@ Podle těchto dvou faktů musíme řídit svůj návrh serverové infrastruktury
 
 Z~hlediska bezpečnosti můžeme rozdělit servery projektu \bso{} na dvě skupiny: okrajové servery a interní servery.
 
-Okrajové servery mají za úkol komunikaci s~Internetem. Jedná se o~několik přesně definovaných míst, skrze něž prochází všechna komunikace určená mimo naši infrastrukturu.
+Okrajové servery mají za úkol komunikaci s~Internetem.
+Jedná se o~několik přesně definovaných míst, skrze něž prochází všechna komunikace určená mimo naši infrastrukturu.
 
-Jednou z~hlavních výhod tohoto přístupu je možnost využívat uvnitř naší infrastruktury nešifrované protokoly jako \acrshort{http} a provádět jejich zašifrování pouze na těchto dedikovaných okrajových serverech. Tyto nešifrované protokoly jsou výkonnější a jednodušší než jejich šifrované varianty\cite{http-faster-https}. Z~důvodu bezpečnosti je ale není možné použít pro Internetovou komunikaci.
+Jednou z~hlavních výhod tohoto přístupu je možnost využívat uvnitř naší infrastruktury nešifrované protokoly jako \acrshort{http}
+a provádět jejich zašifrování pouze na těchto dedikovaných okrajových serverech.
+Tyto nešifrované protokoly jsou výkonnější a jednodušší než jejich šifrované varianty\cite{http-faster-https}.
+Z~důvodu bezpečnosti je nelze použít pro Internetovou komunikaci.
 
 Z~pohledu resilience, obrany proti výpadku, jsou nejdůležitějšími opatřeními replikace a \hyperref[sub:load-balancing]{load-balancing} klíčových částí. Využíváme proto \hyperref[sub:load-balancing]{load balancery} a \hyperref[subsub:managed-databases]{spravované databáze}, u~kterých neznamená výpadek jednoho stroje nedostupnost celé aplikace.
 
